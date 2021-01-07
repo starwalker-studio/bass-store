@@ -1,9 +1,16 @@
 import React from 'react';
+import Navbar from './components/Navbar';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+import Index from './components/Index';
 
 function App() {
   return (
-    <div className="App">
-    </div>
+    <Router>
+      <div>
+        <Navbar />
+        <Index />
+      </div>
+    </Router>
   );
 }
 
