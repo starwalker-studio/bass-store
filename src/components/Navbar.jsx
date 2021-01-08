@@ -3,6 +3,7 @@ import { Link, NavLink, withRouter } from 'react-router-dom';
 
 const Navbar = () => {
 
+    const fontSizeMenu = { fontSize: 'larger' };
     const marginMenu = { marginRight: '8em' };
     const logo = { width: '10ex', marginLeft: '8em' };
     const navbarShadow = {
@@ -12,7 +13,7 @@ const Navbar = () => {
 
     return (
         <div>
-            <nav className="navbar navbar-expand-lg navbar-light bg-light py-1 py-md-2" style={navbarShadow}>
+            <nav className="navbar navbar-expand-lg navbar-light bg-light py-1 py-md-2 fixed-top" style={navbarShadow}>
                 <Link className="navbar-brand" to="/">
                     <img style={logo} src="img\bass-logo-store.png" alt="" />
                 </Link>
@@ -22,11 +23,11 @@ const Navbar = () => {
                     aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
-                <div className="collapse navbar-collapse" id="navbarNav">
+                <div className="collapse navbar-collapse" id="navbarNav" style={fontSizeMenu}>
                     <div className="navbar-nav ml-auto text-right" style={marginMenu}>
-                        <NavLink className="nav-item nav-link mr-2" to="/" exact>Bass Store</NavLink>
-                        <NavLink className="nav-item nav-link mr-2" to="/" exact>Login</NavLink>
-                        <NavLink className="nav-item nav-link mr-2" to="/" exact>Close Session</NavLink>
+                        <NavLink className="nav-item nav-link mr-3" to="/bass" exact>Bass Store</NavLink>
+                        <NavLink className="nav-item nav-link mr-3" to="/login" exact>Login</NavLink>
+                        <a className="nav-item nav-link mr-3" type="button">Close Session</a>
                     </div>
                 </div>
             </nav>
