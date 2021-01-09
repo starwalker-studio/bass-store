@@ -1,23 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { NavLink } from 'react-router-dom';
 
-const Index = () => {
-
-    const [seconds, setSeconds] = useState(0);
-    const [play, setPlay] = useState(false);
+const Index = () => {    
 
     const widthBass = { width: '20em' };
     const widthBanner = { width: '50em' };
     const font = { fontFamily: "Oswald" };
-
-    useEffect(() => {
-        if (play) {
-            const id = window.setInterval(() => {
-                setSeconds(seconds => seconds + 1);
-            }, 1000);
-            return () => window.clearInterval(id);
-        }
-        return undefined;
-    }, [play]);
+    const buttonMetronomeLink = {
+        borderRadius: '25px',
+        width: '30ex'
+    }   
 
     return (
         <div className="container mt-5" style={font}>
@@ -45,10 +37,12 @@ const Index = () => {
                         alt="" style={widthBanner} />
                 </div>
             </div>
-            <button onClick={() => setPlay(true)}>play</button>
-            <button onClick={() => setPlay(false)}>pause</button>
-            <button onClick={() => setSeconds(0)}>reset</button>
-            <h2>{seconds}</h2>
+            <div className="row justify-content-center mt-5 mb-5">
+                <NavLink type="button"
+                    class="btn btn-outline-dark btn-lg"
+                    style={buttonMetronomeLink}
+                    to="/metronome">Try our metronome</NavLink>
+            </div>
         </div>
     )
 }
