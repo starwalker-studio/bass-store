@@ -4,24 +4,28 @@ const Metronome = () => {
 
     const [seconds, setSeconds] = useState(0);
     const [play, setPlay] = useState(false);
-    const sound = new Audio();
+    const [sound] = useState(new Audio());
+    const [soundBell] = useState(new Audio());
+    const [sliderValue, setSliderValue] = useState(100);
+
+    const result = 60000 / sliderValue;
+
+    soundBell.src = 'sound/Roland-SC-88-Metronome-Bell.wav';
     sound.src = 'sound/Korg-N1R-Metronome-Click.wav';
-    
 
     useEffect(() => {
         if (play) {
             const id = window.setInterval(() => {
                 setSeconds(seconds => seconds + 1);
                 sound.play();
-                if (seconds === 4) {
-                    setSeconds(1);
-                }
-            }, 650); 
+                console.log('rendering metro');
+            }, result);
             return () => window.clearInterval(id);
         }
         return undefined;
-    }, [play, seconds]);
+    }, [play, sound, result]);
 
+    seconds === 5 && setSeconds(1);
 
     return (
         <div className="cointainer mt-5">
@@ -33,6 +37,9 @@ const Metronome = () => {
                 <button onClick={() => setPlay(false)}>pause</button>
                 <button onClick={() => setSeconds(0)} className="mr-5">reset</button>
                 <h2>{seconds}</h2>
+                <input type="range" className="custom-range" id="customRange1" min="0" max="300" 
+                value={sliderValue} onChange={e => setSliderValue(e.target.value)}></input>
+                <h2>{sliderValue}</h2>
             </div>
 
         </div>
