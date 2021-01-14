@@ -9,7 +9,7 @@ const Index = () => {
     const buttonMetronomeLink = {
         borderRadius: '25px',
         width: '30ex'
-    }   
+    };   
 
     return (
         <div className="container mt-5" style={font}>
