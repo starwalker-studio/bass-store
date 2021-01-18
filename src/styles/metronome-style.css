@@ -1,0 +1,24 @@
+.buttonMetronome {
+    border-radius: 25px;
+    width: 18ex;
+    height: 6ex;
+}
+
+.buttonBpm {
+    border-radius: 25px;
+    width: 7ex;
+    height: 6ex;
+}
+
+.container-padding {
+    padding: 5ex;
+}
+
+.centerText {
+    text-align: -webkit-center;
+}
+
+.slideBarWith {
+    width: 70ex;
+    margin: auto;
+}
