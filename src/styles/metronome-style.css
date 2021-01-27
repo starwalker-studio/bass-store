@@ -22,3 +22,8 @@
     width: 70ex;
     margin: auto;
 }
+
+.buttonMetronomeLink {
+    border-radius: 25px;
+    width: 25ex
+}

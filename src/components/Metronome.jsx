@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { NavLink } from 'react-router-dom';
 import '../styles/metronome-style.css';
 
 const Metronome = () => {
 
     const [seconds, setSeconds] = useState(1);
     const [play, setPlay] = useState(false);
-    const [sound] = useState(new Audio());
-    const [soundBell] = useState(new Audio());
+    const [click] = useState(new Audio());
     const [sliderValue, setSliderValue] = useState(100);
 
     const result = 60000 / sliderValue;
@@ -15,20 +15,19 @@ const Metronome = () => {
         setPlay(false);
         setSeconds(1);
     };
-
-    soundBell.src = 'sound/Roland-SC-88-Metronome-Bell.wav';
-    sound.src = 'sound/Korg-N1R-Metronome-Click.wav';
+    
+    click.src = 'sound/Korg-N1R-Metronome-Click.wav';
 
     useEffect(() => {
         if (play) {
             const id = window.setInterval(() => {
                 setSeconds(seconds => seconds + 1);
-                sound.play();
+                click.play();
             }, result);
             return () => window.clearInterval(id);
         }
         return undefined;
-    }, [play, sound, result]);
+    }, [play, click, result]);
 
     seconds === 5 && setSeconds(1);
 
@@ -103,8 +102,8 @@ const Metronome = () => {
                 </div>
             </div>
             <div className="row mt-4 centerText">
-                <div className="col-sm"/>
-                <div className="col-sm"/>
+                <div className="col-sm" />
+                <div className="col-sm" />
                 <div className="col-sm">
                     <button
                         className="btn btn-secondary buttonBpm"
@@ -118,8 +117,13 @@ const Metronome = () => {
                         className="btn btn-secondary buttonBpm"
                         onClick={() => setSliderValue(sliderValue + 1)}><h4>+</h4></button>
                 </div>
-                <div className="col-sm"/>
-                <div className="col-sm"/>
+                <div className="col-sm" />
+                <div className="col-sm" />
+            </div>
+            <div className="row justify-content-center mt-5">
+                <NavLink type="button"
+                    class="btn btn-outline-dark btn-lg buttonMetronomeLink"
+                    to="/">Return to home</NavLink>
             </div>
         </div>
     )
