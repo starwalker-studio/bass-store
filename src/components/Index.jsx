@@ -15,7 +15,9 @@ const Index = () => {
         <div className="container mt-5" style={font}>
             <div className="row justify-content-center">
                 <div className="text-center mb-3">
-                    <img src="img\bass-warwick.png" alt="" style={widthBass} />
+                    <NavLink to="/warwick">
+                        <img src="img\bass-warwick.png" alt="" style={widthBass} to="/"/>
+                    </NavLink>                    
                     <h3 className="mt-3">Warwick</h3>
                 </div>
                 <div className="text-center mb-3">
@@ -39,7 +41,7 @@ const Index = () => {
             </div>
             <div className="row justify-content-center mt-5 mb-5">
                 <NavLink type="button"
-                    class="btn btn-outline-dark btn-lg"
+                    className="btn btn-outline-dark btn-lg"
                     style={buttonMetronomeLink}
                     to="/metronome">Try our metronome</NavLink>
             </div>
