@@ -1,20 +1,20 @@
 import React, { useState, useEffect } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { getWarwickModels } from '../redux/bassModelsDucks';
+import { getIbanezModels } from '../redux/bassModelsDucks';
 
 import '../styles/bassmodels-style.css';
 
-const Warwick = () => {
+const Ibanez = () => {
 
     const [num, setNum] = useState(1);
 
     const dispatch = useDispatch();
     useEffect(() => {
-        const getWarwickRedux = () => {
-            dispatch(getWarwickModels(num));
+        const getIbanezRedux = () => {
+            dispatch(getIbanezModels(num));
         }
-        getWarwickRedux();
+        getIbanezRedux();
     }, [num, dispatch])
 
     const models = useSelector(store => store.bassModels.resutls);
@@ -24,7 +24,7 @@ const Warwick = () => {
     return models ? (
         <div className="text-center">
             <div className="backgroundModeltitle">
-                <h1 className="">Warwick Bass Guitars</h1>
+                <h1 className="">Ibañez Bass Guitars</h1>
             </div>
             {
                 !loading ? (
@@ -76,4 +76,4 @@ const Warwick = () => {
     ) : null
 }
 
-export default Warwick
+export default Ibanez

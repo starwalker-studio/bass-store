@@ -4,7 +4,7 @@ import thunk from 'redux-thunk';
 import modelReducer from './bassModelsDucks';
 
 const rootReducer = combineReducers({
-    warwickModels: modelReducer
+    bassModels: modelReducer
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

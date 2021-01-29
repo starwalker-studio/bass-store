@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-const Index = () => {    
+const Index = () => {
 
     const widthBass = { width: '20em' };
     const widthBanner = { width: '50em' };
@@ -9,23 +9,27 @@ const Index = () => {
     const buttonMetronomeLink = {
         borderRadius: '25px',
         width: '30ex'
-    };   
+    };
 
     return (
         <div className="container mt-5" style={font}>
             <div className="row justify-content-center">
                 <div className="text-center mb-3">
                     <NavLink to="/warwick">
-                        <img src="img\bass-warwick.png" alt="" style={widthBass} to="/"/>
-                    </NavLink>                    
+                        <img src="img\bass-warwick.png" alt="" style={widthBass} to="/" />
+                    </NavLink>
                     <h3 className="mt-3">Warwick</h3>
                 </div>
                 <div className="text-center mb-3">
-                    <img src="img\bass-ibanez.png" alt="" style={widthBass} />
+                    <NavLink to="/ibanez">
+                        <img src="img\bass-ibanez.png" alt="" style={widthBass} />
+                    </NavLink>
                     <h3 className="mt-3">Ibañez</h3>
                 </div>
                 <div className="text-center mb-3">
-                    <img src="img\bass-epiphone.png" alt="" style={widthBass} />
+                    <NavLink to="/epiphone">
+                        <img src="img\bass-epiphone.png" alt="" style={widthBass} />
+                    </NavLink>
                     <h3 className="mt-3">Epiphone</h3>
                 </div>
             </div>

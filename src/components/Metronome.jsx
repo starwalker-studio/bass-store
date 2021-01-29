@@ -122,7 +122,7 @@ const Metronome = () => {
             </div>
             <div className="row justify-content-center mt-5">
                 <NavLink type="button"
-                    class="btn btn-outline-dark btn-lg buttonMetronomeLink"
+                    className="btn btn-outline-dark btn-lg buttonMetronomeLink"
                     to="/">Return to home</NavLink>
             </div>
         </div>

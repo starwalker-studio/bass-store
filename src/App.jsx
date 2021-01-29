@@ -5,6 +5,8 @@ import Navbar from './components/Navbar';
 import Index from './components/Index';
 import Metronome from './components/Metronome';
 import Warwick from './components/Warwick';
+import Ibanez from './components/Ibanez';
+import Epiphone from './components/Epiphone';
 
 function App() {
   
@@ -16,6 +18,8 @@ function App() {
           <Switch>
             <Route component={Index} path="/" exact />
             <Route component={Warwick} path="/warwick" exact />
+            <Route component={Ibanez} path="/ibanez" exact />
+            <Route component={Epiphone} path="/epiphone" exact />
             <Route component={Metronome} path="/metronome" exact />
           </Switch>
         </div>
