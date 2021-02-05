@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { storage } from '../firebase';
+import { storage, db } from '../firebase';
 
 // Constants
 const WARWICK_FOLDER = 'warwick';
@@ -9,7 +9,8 @@ const EPIPHONE_FOLDER = 'epiphone';
 const initData = {
     loading: false,
     resutls: [],
-    list: 0
+    list: 0,
+    model: []
 }
 
 // Types
@@ -31,9 +32,12 @@ export default function modelReducer(state = initData, action) {
         case GET_WARWICK_MODELS_LOCAL:
             return { ...state, resutls: action.payload, list: action.list };
         case GET_IBANEZ_MODELS:
-            return { ...state, resutls: action.payload, list: action.list, loading: action.loading };
+            return {
+                ...state, resutls: action.payload, list: action.list,
+                loading: action.loading, model: action.model
+            };
         case GET_IBANEZ_MODELS_LOCAL:
-            return { ...state, resutls: action.payload, list: action.list };
+            return { ...state, resutls: action.payload, list: action.list, model: action.model };
         case GET_EPIPHONE_MODELS:
             return { ...state, resutls: action.payload, list: action.list, loading: action.loading };
         case GET_EPIPHONE_MODELS_LOCAL:
@@ -80,12 +84,13 @@ export const getWarwickModels = (num) => async (dispatch) => {
 // IBANEZ
 export const getIbanezModels = (num) => async (dispatch) => {
     const listItems = await storage.ref().child(IBANEZ_FOLDER).listAll();
-    if (localStorage.getItem(`i-edited-${num}.jpg`)) {
+    if (localStorage.getItem(`i-edited-${num}.jpg`) && localStorage.getItem(`i-model-${num}`)) {
         // consuming from localstorage 
         dispatch({
             type: GET_IBANEZ_MODELS_LOCAL,
             payload: JSON.parse(localStorage.getItem(`i-edited-${num}.jpg`)),
-            list: listItems.items.length
+            list: listItems.items.length,
+            model: JSON.parse(localStorage.getItem(`i-model-${num}`))
         })
         return
     }
@@ -97,13 +102,17 @@ export const getIbanezModels = (num) => async (dispatch) => {
         })
         if (num <= listItems.items.length) {
             const imgSrc = await storage.ref().child(IBANEZ_FOLDER).child(`i-edited-${num}.jpg`).getDownloadURL();
+            const info = await db.collection(IBANEZ_FOLDER).doc(`i-model-${num}`).get();
+            const arrayData = info.data();
             dispatch({
                 type: GET_IBANEZ_MODELS,
                 payload: imgSrc,
                 list: listItems.items.length,
-                loading: false
+                loading: false,
+                model: arrayData
             })
             localStorage.setItem(`i-edited-${num}.jpg`, JSON.stringify(imgSrc));
+            localStorage.setItem(`i-model-${num}`, JSON.stringify(arrayData));
         }
     } catch (error) {
         console.log(error);
