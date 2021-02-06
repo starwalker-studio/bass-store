@@ -28,9 +28,12 @@ export default function modelReducer(state = initData, action) {
         case LOADING:
             return { ...state, loading: action.loading };
         case GET_WARWICK_MODELS:
-            return { ...state, resutls: action.payload, list: action.list, loading: action.loading };
+            return {
+                ...state, resutls: action.payload, list: action.list,
+                loading: action.loading, model: action.model
+            };
         case GET_WARWICK_MODELS_LOCAL:
-            return { ...state, resutls: action.payload, list: action.list };
+            return { ...state, resutls: action.payload, list: action.list, model: action.model };
         case GET_IBANEZ_MODELS:
             return {
                 ...state, resutls: action.payload, list: action.list,
@@ -39,9 +42,12 @@ export default function modelReducer(state = initData, action) {
         case GET_IBANEZ_MODELS_LOCAL:
             return { ...state, resutls: action.payload, list: action.list, model: action.model };
         case GET_EPIPHONE_MODELS:
-            return { ...state, resutls: action.payload, list: action.list, loading: action.loading };
+            return {
+                ...state, resutls: action.payload, list: action.list,
+                loading: action.loading, model: action.model
+            };
         case GET_EPIPHONE_MODELS_LOCAL:
-            return { ...state, resutls: action.payload, list: action.list };
+            return { ...state, resutls: action.payload, list: action.list, model: action.model };
         default:
             return state;
     }
@@ -51,12 +57,13 @@ export default function modelReducer(state = initData, action) {
 // WARWICK
 export const getWarwickModels = (num) => async (dispatch) => {
     const listItems = await storage.ref().child(WARWICK_FOLDER).listAll();
-    if (localStorage.getItem(`w-edited-${num}.png`)) {
+    if (localStorage.getItem(`w-edited-${num}.png`) && localStorage.getItem(`w-model-${num}`)) {
         // consuming from localstorage 
         dispatch({
             type: GET_WARWICK_MODELS_LOCAL,
             payload: JSON.parse(localStorage.getItem(`w-edited-${num}.png`)),
-            list: listItems.items.length
+            list: listItems.items.length,
+            model: JSON.parse(localStorage.getItem(`w-model-${num}`))
         })
         return
     }
@@ -66,15 +73,19 @@ export const getWarwickModels = (num) => async (dispatch) => {
             type: LOADING,
             loading: true
         })
+        const info = await db.collection(WARWICK_FOLDER).doc(`w-model-${num}`).get();
+        const arrayData = info.data();
         if (num <= listItems.items.length) {
             const imgSrc = await storage.ref().child(WARWICK_FOLDER).child(`w-edited-${num}.png`).getDownloadURL();
             dispatch({
                 type: GET_WARWICK_MODELS,
                 payload: imgSrc,
                 list: listItems.items.length,
-                loading: false
+                loading: false,
+                model: arrayData
             })
             localStorage.setItem(`w-edited-${num}.png`, JSON.stringify(imgSrc));
+            localStorage.setItem(`w-model-${num}`, JSON.stringify(arrayData));
         }
     } catch (error) {
         console.log(error);
@@ -122,12 +133,13 @@ export const getIbanezModels = (num) => async (dispatch) => {
 // EPIPHONE
 export const getEpiphoneModels = (num) => async (dispatch) => {
     const listItems = await storage.ref().child(EPIPHONE_FOLDER).listAll();
-    if (localStorage.getItem(`e-edited-${num}.png`)) {
+    if (localStorage.getItem(`e-edited-${num}.png`) && localStorage.getItem(`e-model`)) {
         // consuming from localstorage 
         dispatch({
             type: GET_EPIPHONE_MODELS_LOCAL,
             payload: JSON.parse(localStorage.getItem(`e-edited-${num}.png`)),
-            list: listItems.items.length
+            list: listItems.items.length,
+            model: JSON.parse(localStorage.getItem(`e-model`))
         })
         return
     }
@@ -139,13 +151,17 @@ export const getEpiphoneModels = (num) => async (dispatch) => {
         })
         if (num <= listItems.items.length) {
             const imgSrc = await storage.ref().child(EPIPHONE_FOLDER).child(`e-edited-${num}.png`).getDownloadURL();
+            const info = await db.collection(EPIPHONE_FOLDER).doc(`e-model`).get();
+            const arrayData = info.data();
             dispatch({
                 type: GET_EPIPHONE_MODELS,
                 payload: imgSrc,
                 list: listItems.items.length,
-                loading: false
+                loading: false,
+                model: arrayData
             })
             localStorage.setItem(`e-edited-${num}.png`, JSON.stringify(imgSrc));
+            localStorage.setItem(`e-model`, JSON.stringify(arrayData));
         }
     } catch (error) {
         console.log(error);
