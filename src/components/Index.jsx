@@ -35,8 +35,10 @@ const Index = () => {
             </div>
             <div className="row justify-content-center">
                 <div className="mt-5">
-                    <img className="img-fluid" src="img\bass-strings-banner.png"
-                        alt="" style={widthBanner} />
+                    <NavLink to="/strings">
+                        <img className="img-fluid" src="img\bass-strings-banner.png"
+                            alt="" style={widthBanner} />
+                    </NavLink>
                 </div>
                 <div className="mt-5">
                     <img className="img-fluid" src="img\bass-tabs-banner.png"
