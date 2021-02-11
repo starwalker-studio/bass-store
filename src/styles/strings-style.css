@@ -8,3 +8,9 @@
     color: aliceblue;
     padding-top: 11.1ex;
 }
+
+.buttonImg {
+    border-radius: 50px;
+    width: 20ex;
+    height: 7ex;
+}

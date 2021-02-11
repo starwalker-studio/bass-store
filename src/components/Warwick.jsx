@@ -5,7 +5,10 @@ import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getWarwickModels } from '../redux/bassModelsDucks';
 
+import { getDaddarioStrings, getDRStrings, getErnieBallStrings, getFenderBallStrings } from '../redux/stringsDucks';
+
 import '../styles/bassmodels-style.css';
+import '../styles/loading-animation.css';
 
 const Warwick = () => {
 
@@ -16,6 +19,13 @@ const Warwick = () => {
         const getWarwickRedux = () => {
             dispatch(getWarwickModels(num));
         }
+        const getBassStringsRedux = () => {
+            dispatch(getDaddarioStrings());
+            dispatch(getDRStrings());
+            dispatch(getErnieBallStrings());
+            dispatch(getFenderBallStrings());
+        }
+        getBassStringsRedux();
         getWarwickRedux();
     }, [num, dispatch])
 
@@ -23,6 +33,11 @@ const Warwick = () => {
     const list = useSelector(store => store.bassModels.list);
     const loading = useSelector(store => store.bassModels.loading);
     const model = useSelector(store => store.bassModels.model);
+
+    const ddrio_strings = useSelector(store => store.stringModels.ddrio);
+    const dr_strings = useSelector(store => store.stringModels.dr);
+    const ernie_ball_strings = useSelector(store => store.stringModels.ernie);
+    const fender_strings = useSelector(store => store.stringModels.fender);
 
     return models ? (
         <div className="text-center">
@@ -107,6 +122,77 @@ const Warwick = () => {
                                 </div>
                             </div>
                         </div>
+                        <hr />
+                        <h2>Bass Guitar Strings</h2>
+                        <div className="row justify-content-center">
+                            {
+                                ddrio_strings.map(item => (
+                                    <div className="col p-5" key={item.exl160}>
+                                        <NavLink to={{
+                                            pathname: "/strings",
+                                            state: {
+                                                view: true,
+                                                stringbass: item.exl160
+                                            }
+                                        }}>
+                                            <img className="imgStrings" src={item.exl160.img} alt="" />
+                                        </NavLink>                                    
+                                        <h4 className="mt-2">${item.exl160.price}</h4>
+                                        <button
+                                            className="btn btn-warning">Add to Cart</button>
+                                    </div>
+                                ))
+                            }
+                            {
+                                dr_strings.map(item => (
+                                    <div className="col p-5" key={item.drblackb}>
+                                        <NavLink to={{
+                                            pathname: "/strings",
+                                            state: {
+                                                view: true,
+                                                stringbass: item.drblackb
+                                            }
+                                        }}>
+                                            <img className="imgStrings" src={item.drblackb.img} alt="" />
+                                        </NavLink>                                      
+                                        <h4 className="mt-2">${item.drblackb.price}</h4>
+                                    </div>
+                                ))
+                            }
+                            {
+                                ernie_ball_strings.map(item => (
+                                    <div className="col p-5" key={item.eb2813}>
+                                        <NavLink to={{
+                                            pathname: "/strings",
+                                            state: {
+                                                view: true,
+                                                stringbass: item.eb2813
+                                            }
+                                        }}>
+                                            <img className="imgStrings" src={item.eb2813.img} alt="" />
+                                        </NavLink>                                    
+                                        <h4 className="mt-2">${item.eb2813.price}</h4>
+                                    </div>
+                                ))
+                            }
+                            {
+                                fender_strings.map(item => (
+                                    <div className="col p-5" key={item.fender5250}>
+                                        <NavLink to={{
+                                            pathname: "/strings",
+                                            state: {
+                                                view: true,
+                                                stringbass: item.fender5250
+                                            }
+                                        }}>
+                                            <img className="imgStrings" src={item.fender5250.img} alt="" />
+                                        </NavLink>                                        
+                                        <h4 className="mt-2">${item.fender5250.price}</h4>
+                                    </div>
+                                ))
+                            }
+                        </div> 
+                        <h2>Check out moore</h2>                       
                         <hr />
                         <div className="mb-4">
                             <NavLink to="/ibanez">

@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getEpiphoneModels } from '../redux/bassModelsDucks';
 
 import '../styles/bassmodels-style.css';
+import '../styles/loading-animation.css';
 
 const Epiphone = () => {
 
