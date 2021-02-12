@@ -12,9 +12,12 @@ import '../styles/loading-animation.css';
 
 const Warwick = () => {
 
+    window.scrollTo(0, 0);
+
     const [num, setNum] = useState(1);
 
     const dispatch = useDispatch();
+
     useEffect(() => {
         const getWarwickRedux = () => {
             dispatch(getWarwickModels(num));
@@ -117,7 +120,8 @@ const Warwick = () => {
                                         <button className="mt-3 mb-2 btn btn-warning btn-lg"><strong>Add to cart</strong>
                                             <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-cart4 ml-2" viewBox="0 1 16 16">
                                                 <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z" />
-                                            </svg></button>
+                                            </svg>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -128,78 +132,55 @@ const Warwick = () => {
                             {
                                 ddrio_strings.map(item => (
                                     <div className="col p-5" key={item.exl160}>
-                                        <NavLink to={{
-                                            pathname: "/strings",
-                                            state: {
-                                                view: true,
-                                                stringbass: item.exl160
-                                            }
-                                        }}>
+                                        <NavLink to={{ pathname: "/strings", state: { view: true, stringbass: item.exl160 } }}>
                                             <img className="imgStrings" src={item.exl160.img} alt="" />
-                                        </NavLink>                                    
+                                        </NavLink>
                                         <h4 className="mt-2">${item.exl160.price}</h4>
-                                        <button
-                                            className="btn btn-warning">Add to Cart</button>
+                                        <button className="btn btn-warning">Add to Cart</button>
                                     </div>
                                 ))
                             }
                             {
                                 dr_strings.map(item => (
                                     <div className="col p-5" key={item.drblackb}>
-                                        <NavLink to={{
-                                            pathname: "/strings",
-                                            state: {
-                                                view: true,
-                                                stringbass: item.drblackb
-                                            }
-                                        }}>
+                                        <NavLink to={{ pathname: "/strings", state: { view: true, stringbass: item.drblackb } }}>
                                             <img className="imgStrings" src={item.drblackb.img} alt="" />
-                                        </NavLink>                                      
+                                        </NavLink>
                                         <h4 className="mt-2">${item.drblackb.price}</h4>
+                                        <button className="btn btn-warning">Add to Cart</button>
                                     </div>
                                 ))
                             }
                             {
                                 ernie_ball_strings.map(item => (
                                     <div className="col p-5" key={item.eb2813}>
-                                        <NavLink to={{
-                                            pathname: "/strings",
-                                            state: {
-                                                view: true,
-                                                stringbass: item.eb2813
-                                            }
-                                        }}>
+                                        <NavLink to={{ pathname: "/strings", state: { view: true, stringbass: item.eb2813 } }}>
                                             <img className="imgStrings" src={item.eb2813.img} alt="" />
-                                        </NavLink>                                    
+                                        </NavLink>
                                         <h4 className="mt-2">${item.eb2813.price}</h4>
+                                        <button className="btn btn-warning">Add to Cart</button>
                                     </div>
                                 ))
                             }
                             {
                                 fender_strings.map(item => (
                                     <div className="col p-5" key={item.fender5250}>
-                                        <NavLink to={{
-                                            pathname: "/strings",
-                                            state: {
-                                                view: true,
-                                                stringbass: item.fender5250
-                                            }
-                                        }}>
+                                        <NavLink to={{ pathname: "/strings", state: { view: true, stringbass: item.fender5250 } }}>
                                             <img className="imgStrings" src={item.fender5250.img} alt="" />
-                                        </NavLink>                                        
+                                        </NavLink>
                                         <h4 className="mt-2">${item.fender5250.price}</h4>
+                                        <button className="btn btn-warning">Add to Cart</button>
                                     </div>
                                 ))
                             }
-                        </div> 
-                        <h2>Check out moore</h2>                       
+                        </div>
                         <hr />
                         <div className="mb-4">
-                            <NavLink to="/ibanez">
-                                <button type="button" className="btn btn-light border buttonImg mr-2">Ibañez</button>
-                            </NavLink>
                             <NavLink to="/">
                                 <button type="button" className="btn btn-light border buttonImg mr-2" >Home</button>
+                            </NavLink>
+                            <NavLink to="/ibanez">
+                                <button type="button" className="btn btn-light border buttonImg mr-2">Ibañez</button>
                             </NavLink>
                             <NavLink to="/epiphone">
                                 <button type="button" className="btn btn-light border buttonImg mr-2" >Epiphone</button>

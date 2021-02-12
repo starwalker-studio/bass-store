@@ -10,28 +10,22 @@ const BassStrings = (props) => {
 
     window.scrollTo(0, 0);
 
-    const [modelView, setModelView] = useState(false);
-    const [modelImg, setModelImg] = useState('');
-    const [modelTitle, setModelTitle] = useState('');
-    const [modelInfo, setModelInfo] = useState('');
-    const [modelPrice, setModelPrice] = useState(0);
-
-    // setModelView(props.location.state.view)
-    // setModelImg(props.location.state.stringbass.img)
-    // setModelTitle(props.location.state.stringbass.title)
-    // setModelInfo(props.location.state.stringbass.info)
-    // setModelPrice(props.location.state.stringbass.price)
-    const dispacth = useDispatch();
+    const [modelView, setModelView] = useState(props.location.state.view);
+    const [modelImg, setModelImg] = useState(props.location.state.stringbass.img);
+    const [modelTitle, setModelTitle] = useState(props.location.state.stringbass.title);
+    const [modelInfo, setModelInfo] = useState(props.location.state.stringbass.info);
+    const [modelPrice, setModelPrice] = useState(props.location.state.stringbass.price);
+    const dispatch = useDispatch();
 
     useEffect(() => {
         const getBassStringsRedux = () => {
-            dispacth(getDaddarioStrings());
-            dispacth(getDRStrings());
-            dispacth(getErnieBallStrings());
-            dispacth(getFenderBallStrings());
+            dispatch(getDaddarioStrings());
+            dispatch(getDRStrings());
+            dispatch(getErnieBallStrings());
+            dispatch(getFenderBallStrings());
         }
         getBassStringsRedux();
-    }, [dispacth]);
+    }, [dispatch]);
 
     const ddrio_strings = useSelector(store => store.stringModels.ddrio);
     const dr_strings = useSelector(store => store.stringModels.dr);
@@ -61,16 +55,18 @@ const BassStrings = (props) => {
                                 <div className="row justify-content-center p-4">
                                     <div className="col text-center">
                                         <img className="" src={modelImg} alt="" />
-                                        <h2 className="mt-3">Price: ${modelPrice}</h2>
-                                        <button className="mt-3 mb-4 btn btn-warning btn-lg"><strong>Add to cart</strong>
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-cart4 ml-2" viewBox="0 1 16 16">
-                                                <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z" />
-                                            </svg>
-                                        </button>
                                     </div>
                                     <div className="col text-left">
                                         <h4>{modelTitle}</h4>
                                         <p>{modelInfo}</p>
+                                        <div className="row col">
+                                            <h2 className="mr-5 mt-3">Price: ${modelPrice}</h2>
+                                            <button className="mt-3 mb-4 btn btn-warning btn-lg"><strong>Add to cart</strong>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-cart4 ml-2" viewBox="0 1 16 16">
+                                                    <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z" />
+                                                </svg>
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                                 <button type="button"
@@ -85,7 +81,7 @@ const BassStrings = (props) => {
                                 <div className="col p-5" key={item.exl160}>
                                     <img type="button" className="imgStrings" src={item.exl160.img} alt=""
                                         onClick={() => info(item.exl160)} />
-                                    <p>{item.exl160.title}</p>
+                                    <p className="text-truncate" style={{ width: '11rem', margin: 'auto' }}>{item.exl160.title}</p>
                                     <h4>${item.exl160.price}</h4>
                                     <button
                                         className="btn btn-warning"
@@ -96,9 +92,9 @@ const BassStrings = (props) => {
                         {
                             ddrio_strings.map(item => (
                                 <div className="col p-5" key={item.exl165}>
-                                    <img className="imgStrings" src={item.exl165.img} alt=""
+                                    <img type="button" className="imgStrings" src={item.exl165.img} alt=""
                                         onClick={() => info(item.exl165)} />
-                                    <p>{item.exl165.title}</p>
+                                    <p className="text-truncate" style={{ width: '11rem', margin: 'auto' }}>{item.exl165.title}</p>
                                     <h4>${item.exl165.price}</h4>
                                     <button
                                         className="btn btn-warning"
@@ -109,9 +105,9 @@ const BassStrings = (props) => {
                         {
                             ddrio_strings.map(item => (
                                 <div className="col p-5" key={item.exl170}>
-                                    <img className="imgStrings" src={item.exl170.img} alt=""
+                                    <img type="button" className="imgStrings" src={item.exl170.img} alt=""
                                         onClick={() => info(item.exl170)} />
-                                    <p>{item.exl170.title}</p>
+                                    <p className="text-truncate" style={{ width: '11rem', margin: 'auto' }}>{item.exl170.title}</p>
                                     <h4>${item.exl170.price}</h4>
                                     <button
                                         className="btn btn-warning"
@@ -122,9 +118,9 @@ const BassStrings = (props) => {
                         {
                             ddrio_strings.map(item => (
                                 <div className="col p-5" key={item.exl230}>
-                                    <img className="imgStrings" src={item.exl230.img} alt=""
+                                    <img type="button" className="imgStrings" src={item.exl230.img} alt=""
                                         onClick={() => info(item.exl230)} />
-                                    <p>{item.exl230.title}</p>
+                                    <p className="text-truncate" style={{ width: '11rem', margin: 'auto' }}>{item.exl230.title}</p>
                                     <h4>${item.exl230.price}</h4>
                                     <button
                                         className="btn btn-warning"
@@ -137,36 +133,52 @@ const BassStrings = (props) => {
                         {
                             dr_strings.map(item => (
                                 <div className="col p-5" key={item.drblackb}>
-                                    <img className="imgStrings" src={item.drblackb.img} alt="" />
-                                    <p>{item.drblackb.title}</p>
+                                    <img type="button" className="imgStrings" src={item.drblackb.img} alt=""
+                                        onClick={() => info(item.drblackb)} />
+                                    <p className="text-truncate" style={{ width: '11rem', margin: 'auto' }}>{item.drblackb.title}</p>
                                     <h4>${item.drblackb.price}</h4>
+                                    <button
+                                        className="btn btn-warning"
+                                        onClick={() => info(item.exl160)}>Add to Cart</button>
                                 </div>
                             ))
                         }
                         {
                             dr_strings.map(item => (
                                 <div className="col p-5" key={item.drhibeamm}>
-                                    <img className="imgStrings" src={item.drhibeamm.img} alt="" />
-                                    <p>{item.drhibeamm.title}</p>
+                                    <img type="button" className="imgStrings" src={item.drhibeamm.img} alt=""
+                                        onClick={() => info(item.drhibeamm)} />
+                                    <p className="text-truncate" style={{ width: '11rem', margin: 'auto' }}>{item.drhibeamm.title}</p>
                                     <h4>$${item.drhibeamm.price}</h4>
+                                    <button
+                                        className="btn btn-warning"
+                                        onClick={() => info(item.exl160)}>Add to Cart</button>
                                 </div>
                             ))
                         }
                         {
                             dr_strings.map(item => (
                                 <div className="col p-5" key={item.drhibeamxl}>
-                                    <img className="imgStrings" src={item.drhibeamxl.img} alt="" />
-                                    <p>{item.drhibeamxl.title}</p>
+                                    <img type="button" className="imgStrings" src={item.drhibeamxl.img} alt=""
+                                        onClick={() => info(item.drhibeamxl)} />
+                                    <p className="text-truncate" style={{ width: '11rem', margin: 'auto' }}>{item.drhibeamxl.title}</p>
                                     <h4>$${item.drhibeamxl.price}</h4>
+                                    <button
+                                        className="btn btn-warning"
+                                        onClick={() => info(item.exl160)}>Add to Cart</button>
                                 </div>
                             ))
                         }
                         {
                             dr_strings.map(item => (
                                 <div className="col p-5" key={item.drlorider}>
-                                    <img className="imgStrings" src={item.drlorider.img} alt="" />
-                                    <p>{item.drlorider.title}</p>
+                                    <img type="button" className="imgStrings" src={item.drlorider.img} alt=""
+                                        onClick={() => info(item.drlorider)} />
+                                    <p className="text-truncate" style={{ width: '11rem', margin: 'auto' }}>{item.drlorider.title}</p>
                                     <h4>$${item.drlorider.price}</h4>
+                                    <button
+                                        className="btn btn-warning"
+                                        onClick={() => info(item.exl160)}>Add to Cart</button>
                                 </div>
                             ))
                         }
@@ -175,36 +187,52 @@ const BassStrings = (props) => {
                         {
                             ernie_ball_strings.map(item => (
                                 <div className="col p-5" key={item.eb2813}>
-                                    <img className="imgStrings" src={item.eb2813.img} alt="" />
-                                    <p>{item.eb2813.title}</p>
+                                    <img type="button" className="imgStrings" src={item.eb2813.img} alt=""
+                                        onClick={() => info(item.eb2813)} />
+                                    <p className="text-truncate" style={{ width: '11rem', margin: 'auto' }}>{item.eb2813.title}</p>
                                     <h4>${item.eb2813.price}</h4>
+                                    <button
+                                        className="btn btn-warning"
+                                        onClick={() => info(item.exl160)}>Add to Cart</button>
                                 </div>
                             ))
                         }
                         {
                             ernie_ball_strings.map(item => (
                                 <div className="col p-5" key={item.eb2832}>
-                                    <img className="imgStrings" src={item.eb2832.img} alt="" />
-                                    <p>{item.eb2832.title}</p>
+                                    <img type="button" className="imgStrings" src={item.eb2832.img} alt=""
+                                        onClick={() => info(item.eb2832)} />
+                                    <p className="text-truncate" style={{ width: '11rem', margin: 'auto' }}>{item.eb2832.title}</p>
                                     <h4>$${item.eb2832.price}</h4>
+                                    <button
+                                        className="btn btn-warning"
+                                        onClick={() => info(item.exl160)}>Add to Cart</button>
                                 </div>
                             ))
                         }
                         {
                             ernie_ball_strings.map(item => (
                                 <div className="col p-5" key={item.eb2833}>
-                                    <img className="imgStrings" src={item.eb2833.img} alt="" />
-                                    <p>{item.eb2833.title}</p>
+                                    <img type="button" className="imgStrings" src={item.eb2833.img} alt=""
+                                        onClick={() => info(item.eb2833)} />
+                                    <p className="text-truncate" style={{ width: '11rem', margin: 'auto' }}>{item.eb2833.title}</p>
                                     <h4>$${item.eb2833.price}</h4>
+                                    <button
+                                        className="btn btn-warning"
+                                        onClick={() => info(item.exl160)}>Add to Cart</button>
                                 </div>
                             ))
                         }
                         {
                             ernie_ball_strings.map(item => (
                                 <div className="col p-5" key={item.eb2834}>
-                                    <img className="imgStrings" src={item.eb2834.img} alt="" />
-                                    <p>{item.eb2834.title}</p>
+                                    <img type="button" className="imgStrings" src={item.eb2834.img} alt=""
+                                        onClick={() => info(item.eb2834)} />
+                                    <p className="text-truncate" style={{ width: '11rem', margin: 'auto' }}>{item.eb2834.title}</p>
                                     <h4>$${item.eb2834.price}</h4>
+                                    <button
+                                        className="btn btn-warning"
+                                        onClick={() => info(item.exl160)}>Add to Cart</button>
                                 </div>
                             ))
                         }
@@ -213,36 +241,52 @@ const BassStrings = (props) => {
                         {
                             fender_strings.map(item => (
                                 <div className="col p-5" key={item.fender5250}>
-                                    <img className="imgStrings" src={item.fender5250.img} alt="" />
-                                    <p>{item.fender5250.title}</p>
+                                    <img type="button" className="imgStrings" src={item.fender5250.img} alt=""
+                                        onClick={() => info(item.fender5250)} />
+                                    <p className="text-truncate" style={{ width: '11rem', margin: 'auto' }}>{item.fender5250.title}</p>
                                     <h4>${item.fender5250.price}</h4>
+                                    <button
+                                        className="btn btn-warning"
+                                        onClick={() => info(item.exl160)}>Add to Cart</button>
                                 </div>
                             ))
                         }
                         {
                             fender_strings.map(item => (
                                 <div className="col p-5" key={item.fender72505}>
-                                    <img className="imgStrings" src={item.fender72505.img} alt="" />
-                                    <p>{item.fender72505.title}</p>
+                                    <img type="button" className="imgStrings" src={item.fender72505.img} alt=""
+                                        onClick={() => info(item.fender72505)} />
+                                    <p className="text-truncate" style={{ width: '11rem', margin: 'auto' }}>{item.fender72505.title}</p>
                                     <h4>$${item.fender72505.price}</h4>
+                                    <button
+                                        className="btn btn-warning"
+                                        onClick={() => info(item.exl160)}>Add to Cart</button>
                                 </div>
                             ))
                         }
                         {
                             fender_strings.map(item => (
                                 <div className="col p-5" key={item.fender7250}>
-                                    <img className="imgStrings" src={item.fender7250.img} alt="" />
-                                    <p>{item.fender7250.title}</p>
+                                    <img type="button" className="imgStrings" src={item.fender7250.img} alt=""
+                                        onClick={() => info(item.fender7250)} />
+                                    <p className="text-truncate" style={{ width: '11rem', margin: 'auto' }}>{item.fender7250.title}</p>
                                     <h4>$${item.fender7250.price}</h4>
+                                    <button
+                                        className="btn btn-warning"
+                                        onClick={() => info(item.exl160)}>Add to Cart</button>
                                 </div>
                             ))
                         }
                         {
                             fender_strings.map(item => (
                                 <div className="col p-5" key={item.fender9050}>
-                                    <img className="imgStrings" src={item.fender9050.img} alt="" />
-                                    <p>{item.fender9050.title}</p>
+                                    <img type="button" className="imgStrings" src={item.fender9050.img} alt=""
+                                        onClick={() => info(item.fender9050)} />
+                                    <p className="text-truncate" style={{ width: '11rem', margin: 'auto' }}>{item.fender9050.title}</p>
                                     <h4>$${item.fender9050.price}</h4>
+                                    <button
+                                        className="btn btn-warning"
+                                        onClick={() => info(item.exl160)}>Add to Cart</button>
                                 </div>
                             ))
                         }

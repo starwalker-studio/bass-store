@@ -1,0 +1,21 @@
+.widthBass { 
+    width: 20em;
+    transition: transform .05s; 
+}
+
+.widthBanner { 
+    width: 50em; 
+}
+
+.font-oswald { 
+    font-family: Oswald; 
+}
+
+.buttonMetronomeLink {
+    border-radius: 25px;
+    width: 30ex;
+}
+
+.widthBass:hover {
+    transform: scale(1.12);
+}

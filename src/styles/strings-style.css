@@ -1,5 +1,6 @@
 .imgStrings {
     width: 10em;
+    filter: brightness(100%);
 }
 
 .backgroundModeltitle {
@@ -14,3 +15,11 @@
     width: 20ex;
     height: 7ex;
 }
+
+.title-bass-strings{
+    max-width: 150px;
+}
+  
+.imgStrings:hover {
+    filter: brightness(132%);
+  }

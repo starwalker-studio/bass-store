@@ -5,18 +5,30 @@ import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getIbanezModels } from '../redux/bassModelsDucks';
 
+import { getDaddarioStrings, getDRStrings, getErnieBallStrings, getFenderBallStrings } from '../redux/stringsDucks';
+
 import '../styles/bassmodels-style.css';
 import '../styles/loading-animation.css';
 
 const Ibanez = () => {
 
+    window.scrollTo(0, 0);
+
     const [num, setNum] = useState(1);
 
     const dispatch = useDispatch();
+
     useEffect(() => {
         const getIbanezRedux = () => {
             dispatch(getIbanezModels(num));
         }
+        const getBassStringsRedux = () => {
+            dispatch(getDaddarioStrings());
+            dispatch(getDRStrings());
+            dispatch(getErnieBallStrings());
+            dispatch(getFenderBallStrings());
+        }
+        getBassStringsRedux();
         getIbanezRedux();
     }, [num, dispatch])
 
@@ -24,6 +36,11 @@ const Ibanez = () => {
     const list = useSelector(store => store.bassModels.list);
     const loading = useSelector(store => store.bassModels.loading);
     const model = useSelector(store => store.bassModels.model);
+
+    const ddrio_strings = useSelector(store => store.stringModels.ddrio);
+    const dr_strings = useSelector(store => store.stringModels.dr);
+    const ernie_ball_strings = useSelector(store => store.stringModels.ernie);
+    const fender_strings = useSelector(store => store.stringModels.fender);
 
     return models ? (
         <div className="text-center">
@@ -108,6 +125,54 @@ const Ibanez = () => {
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <hr />
+                        <h2>Bass Guitar Strings</h2>
+                        <div className="row justify-content-center">
+                            {
+                                fender_strings.map(item => (
+                                    <div className="col p-5" key={item.fender7250}>
+                                        <NavLink to={{ pathname: "/strings", state: { view: true, stringbass: item.fender7250 } }}>
+                                            <img className="imgStrings" src={item.fender7250.img} alt="" />
+                                        </NavLink>
+                                        <h4 className="mt-2">${item.fender7250.price}</h4>
+                                        <button className="btn btn-warning">Add to Cart</button>
+                                    </div>
+                                ))
+                            }
+                            {
+                                ddrio_strings.map(item => (
+                                    <div className="col p-5" key={item.exl165}>
+                                        <NavLink to={{ pathname: "/strings", state: { view: true, stringbass: item.exl165 } }}>
+                                            <img className="imgStrings" src={item.exl165.img} alt="" />
+                                        </NavLink>
+                                        <h4 className="mt-2">${item.exl165.price}</h4>
+                                        <button className="btn btn-warning">Add to Cart</button>
+                                    </div>
+                                ))
+                            }
+                            {
+                                dr_strings.map(item => (
+                                    <div className="col p-5" key={item.drhibeamxl}>
+                                        <NavLink to={{ pathname: "/strings", state: { view: true, stringbass: item.drhibeamxl } }}>
+                                            <img className="imgStrings" src={item.drhibeamxl.img} alt="" />
+                                        </NavLink>
+                                        <h4 className="mt-2">${item.drhibeamxl.price}</h4>
+                                        <button className="btn btn-warning">Add to Cart</button>
+                                    </div>
+                                ))
+                            }
+                            {
+                                ernie_ball_strings.map(item => (
+                                    <div className="col p-5" key={item.eb2834}>
+                                        <NavLink to={{ pathname: "/strings", state: { view: true, stringbass: item.eb2834 } }}>
+                                            <img className="imgStrings" src={item.eb2834.img} alt="" />
+                                        </NavLink>
+                                        <h4 className="mt-2">${item.eb2834.price}</h4>
+                                        <button className="btn btn-warning">Add to Cart</button>
+                                    </div>
+                                ))
+                            }                            
                         </div>
                         <hr />
                         <div className="mb-4">
