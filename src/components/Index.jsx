@@ -43,6 +43,9 @@ const Index = () => {
                 <NavLink type="button"
                     className="btn btn-outline-dark btn-lg buttonMetronomeLink"
                     to="/metronome">Try our metronome</NavLink>
+                <NavLink type="button"
+                    className="btn btn-outline-dark btn-lg buttonMetronomeLink"
+                    to="/basstabs">Bass Tabs</NavLink>
             </div>
         </div>
     )

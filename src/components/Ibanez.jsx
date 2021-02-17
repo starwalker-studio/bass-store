@@ -44,7 +44,7 @@ const Ibanez = () => {
 
     return models ? (
         <div className="text-center">
-            <div className="backgroundModeltitle">
+            <div className="backgroundBassModeltitle">
                 <h1 className="">Ibañez Bass Guitars</h1>
             </div>
             {
@@ -172,7 +172,7 @@ const Ibanez = () => {
                                         <button className="btn btn-warning">Add to Cart</button>
                                     </div>
                                 ))
-                            }                            
+                            }
                         </div>
                         <hr />
                         <div className="mb-4">
@@ -188,13 +188,10 @@ const Ibanez = () => {
                         </div>
                     </div>
                 ) : (
-                        <div className="gooey">
-                            <span className="dot"></span>
-                            <div className="dots">
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                            </div>
+                        <div className="spinner">
+                            <div className="bounce1"></div>
+                            <div className="bounce2"></div>
+                            <div className="bounce3"></div>
                         </div>
                     )
             }

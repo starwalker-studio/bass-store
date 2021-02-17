@@ -1,0 +1,19 @@
+.backgroundModeltitle {
+    height: auto;
+    width: auto;
+    background: rgb(56, 56, 56);
+    color: aliceblue;
+    padding-top: 10.1ex;
+}
+
+.buttonBpmTbs {
+    border-radius: 25px;
+    width: 7ex;
+    height: 5ex;
+}
+
+.buttonMetronomeTabs {
+    border-radius: 25px;
+    width: 10ex;
+    height: 5ex;
+}

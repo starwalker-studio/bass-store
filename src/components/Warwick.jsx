@@ -44,7 +44,7 @@ const Warwick = () => {
 
     return models ? (
         <div className="text-center">
-            <div className="backgroundModeltitle">
+            <div className="backgroundBassModeltitle">
                 <h1 className="">Warwick Bass Guitars</h1>
             </div>
             {
@@ -188,13 +188,10 @@ const Warwick = () => {
                         </div>
                     </div>
                 ) : (
-                        <div className="gooey">
-                            <span className="dot"></span>
-                            <div className="dots">
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                            </div>
+                        <div className="spinner">
+                            <div className="bounce1"></div>
+                            <div className="bounce2"></div>
+                            <div className="bounce3"></div>
                         </div>
                     )
             }

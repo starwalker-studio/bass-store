@@ -31,6 +31,20 @@ const Metronome = () => {
 
     seconds === 5 && setSeconds(1);
 
+    const plusSlider = () => {
+        const moreThan = (sliderValue >= 200) ? true : false;
+        if (!moreThan) {
+            setSliderValue(parseInt(sliderValue) + 1);            
+        } 
+    }
+
+    const lessSlider = () => {
+        const lessthan = (sliderValue <= 0) ? true : false;
+        if (!lessthan) {
+            setSliderValue(parseInt(sliderValue) - 1); 
+        }
+    }
+
     return (
         <div className="cointainer mt-3 container-padding">
             <div className="row justify-content-md-center">
@@ -107,7 +121,7 @@ const Metronome = () => {
                 <div className="col-sm">
                     <button
                         className="btn btn-secondary buttonBpm"
-                        onClick={() => setSliderValue(sliderValue - 1)}><h4>-</h4></button>
+                        onClick={() => lessSlider()}><h4>-</h4></button>
                 </div>
                 <div className="col-sm">
                     <h3 className="centerText">{sliderValue} BPM</h3>
@@ -115,7 +129,7 @@ const Metronome = () => {
                 <div className="col-sm">
                     <button
                         className="btn btn-secondary buttonBpm"
-                        onClick={() => setSliderValue(sliderValue + 1)}><h4>+</h4></button>
+                        onClick={() => plusSlider()}><h4>+</h4></button>
                 </div>
                 <div className="col-sm" />
                 <div className="col-sm" />

@@ -8,6 +8,7 @@ import Warwick from './components/Warwick';
 import Ibanez from './components/Ibanez';
 import Epiphone from './components/Epiphone';
 import BassStrings from './components/BassStrings';
+import PdfBassTabs from './components/PdfBassTabs';
 
 function App() {
   
@@ -23,6 +24,7 @@ function App() {
             <Route component={Epiphone} path="/epiphone" exact />
             <Route component={BassStrings} path="/strings" exact />
             <Route component={Metronome} path="/metronome" exact />
+            <Route component={PdfBassTabs} path="/basstabs" exact />
           </Switch>
         </div>
       </Router>
