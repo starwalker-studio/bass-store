@@ -3,10 +3,12 @@ import thunk from 'redux-thunk';
 
 import modelReducer from './bassModelsDucks';
 import bassStrReducer from './stringsDucks';
+import tabsReducer from './bassTabsDucks';
 
 const rootReducer = combineReducers({
     bassModels: modelReducer,
-    stringModels: bassStrReducer
+    stringModels: bassStrReducer,
+    tabs: tabsReducer
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
