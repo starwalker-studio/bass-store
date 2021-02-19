@@ -17,3 +17,9 @@
     width: 10ex;
     height: 5ex;
 }
+
+.buttonReturnCatalog {
+    border-radius: 25px;
+    width: 13em;
+    height: 5.5ex;
+}

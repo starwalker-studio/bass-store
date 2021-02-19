@@ -1,16 +1,22 @@
 import React, { useState, useEffect } from 'react';
 
+import { NavLink } from 'react-router-dom';
+
 import { useDispatch, useSelector } from 'react-redux';
 
 import { getBassTabs } from '../redux/bassTabsDucks';
 
 import { Document, Page, pdfjs } from 'react-pdf';
+
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 
 import '../styles/basstabs-style.css';
 
 
 const PdfBassTabs = () => {
+
+    window.scrollTo(0, 0);
+
     pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
     const [numPages, setNumPages] = useState(null);
     const [pageNumber, setPageNumber] = useState(1);
@@ -26,6 +32,7 @@ const PdfBassTabs = () => {
     const dispatch = useDispatch();
 
     const pdf = useSelector(store => store.tabs.pdf);
+    const loading = useSelector(store => store.tabs.loading);
 
     const files = [
         { band: 'Alien Ant Farm', file: 'Alien Ant Farm - Smooth Criminal Bass.pdf' },
@@ -68,6 +75,12 @@ const PdfBassTabs = () => {
         setCatalog(false);
     }
 
+    const returnBassTabs = () => {
+        setNumPages(null);
+        setPageNumber(1);
+        setCatalog(true);
+    }
+
     return (
         <div>
             <div className="text-center">
@@ -102,39 +115,67 @@ const PdfBassTabs = () => {
                 <div className="container">
                     {
                         catalog ? (
-                            <div className="row justify-content-center">
-                                <ul className="list-group list-group-flush text-right">
-                                    <li className="list-group-item disabled text-center" aria-disabled="true"><h1 className="mt-3">Bass Tabs</h1></li>
-                                    {
-                                        files.map(item => (
-                                            <li key={item.band}
-                                                className="list-group-item"><strong>{item.file}</strong>
-                                                <button className="btn btn-secondary ml-3"
-                                                    onClick={() => getPdf(item.file)}>View <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-file-text" viewBox="0 0 16 16">
-                                                        <path d="M5 4a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1H5zm-.5 2.5A.5.5 0 0 1 5 6h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5zM5 8a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1H5zm0 2a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1H5z" />
-                                                        <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm10-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1z" />
-                                                    </svg></button>
-                                                <button className="btn btn-info ml-3">Download <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-save2" viewBox="0 0 16 16">
-                                                    <path d="M2 1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H9.5a1 1 0 0 0-1 1v4.5h2a.5.5 0 0 1 .354.854l-2.5 2.5a.5.5 0 0 1-.708 0l-2.5-2.5A.5.5 0 0 1 5.5 6.5h2V2a2 2 0 0 1 2-2H14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h2.5a.5.5 0 0 1 0 1H2z" />
-                                                </svg></button></li>
-                                        ))
-                                    }
-                                </ul>
+                            <div>
+                                <div className="row justify-content-center">
+                                    <ul className="list-group list-group-flush text-right">
+                                        <li className="list-group-item disabled text-center" aria-disabled="true"><h1>Bass Tabs</h1></li>
+                                        {
+                                            files.map(item => (
+                                                <li key={item.band}
+                                                    className="list-group-item"><strong>{item.file}</strong>
+                                                    <button className="btn btn-info ml-3"
+                                                        onClick={() => getPdf(item.file)}>View <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-file-text" viewBox="0 0 16 16">
+                                                            <path d="M5 4a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1H5zm-.5 2.5A.5.5 0 0 1 5 6h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5zM5 8a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1H5zm0 2a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1H5z" />
+                                                            <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm10-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1z" />
+                                                        </svg></button></li>
+                                            ))
+                                        }
+                                    </ul>
+                                </div>
+                                <hr />
+                                <NavLink to="/">
+                                    <button className="btn btn-dark buttonReturnCatalog mt-2 mb-5"
+                                        onClick={() => returnBassTabs()}>Return to Home</button>
+                                </NavLink>
                             </div>
                         ) : (
-                                <div>
-                                    <div className="d-flex justify-content-center">
-                                        <Document
-                                            file={pdf}
-                                            onLoadSuccess={onDocumentLoadSuccess}
-                                        >
-                                            <Page pageNumber={pageNumber} />
-                                        </Document>
+                                !loading ? (
+                                    <div className="mb-5">
+                                        <div className="d-flex justify-content-center">
+                                            <Document
+                                                file={pdf}
+                                                onLoadSuccess={onDocumentLoadSuccess}
+                                            >
+                                                <Page pageNumber={pageNumber} />
+                                            </Document>
+                                        </div>
+                                        <p>Page {pageNumber} of {numPages}</p>
+                                        <div className="row justify-content-center mb-3">
+                                            {
+                                                pageNumber !== 1 && (
+                                                    <button className="btn btn-secondary mr-5 buttonMetronomeTabs"
+                                                        onClick={() => setPageNumber(pageNumber - 1)}
+                                                    >back</button>
+                                                )
+                                            }
+                                            {
+                                                pageNumber !== numPages && (
+                                                    <button className="btn btn-secondary buttonMetronomeTabs"
+                                                        onClick={() => setPageNumber(pageNumber + 1)}
+                                                    >next</button>
+                                                )
+                                            }
+                                        </div>
+                                        <button className="btn btn-info buttonReturnCatalog"
+                                            onClick={() => returnBassTabs()}>Return to Bass Tabs</button>
                                     </div>
-                                    <button className="btn btn-black"
-                                        onClick={() => setPageNumber(pageNumber + 1)}>next</button>
-                                    <p>Page {pageNumber} of {numPages}</p>
-                                </div>
+                                ) : (
+                                        <div className="spinner">
+                                            <div className="bounce1"></div>
+                                            <div className="bounce2"></div>
+                                            <div className="bounce3"></div>
+                                        </div>
+                                    )
                             )
                     }
                 </div >

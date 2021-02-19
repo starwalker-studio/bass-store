@@ -18,6 +18,8 @@ export default function tabsReducer(state = initData, action) {
         case LOADING:
             return { ...state, loading: action.loading };
         case GET_BASS_TABS:
+            return { ...state, pdf: action.src, loading: action.loading };
+        case GET_BASS_TABS_LOCAL:
             return { ...state, pdf: action.src };
         default:
             return state;
@@ -26,16 +28,27 @@ export default function tabsReducer(state = initData, action) {
 
 // Actions
 export const getBassTabs = (file) => async (dispatch) => {
-    dispatch({
-        type: LOADING,
-        loading: true
-    })
+    // from local
+    if (localStorage.getItem(file)) {
+        dispatch({
+            type: GET_BASS_TABS_LOCAL,
+            src: JSON.parse(localStorage.getItem(file))
+        })
+        return
+    }
     try {
+        // From firestore storage
+        dispatch({
+            type: LOADING,
+            loading: true
+        })
         const pdf = await storage.ref().child(BASS_TABS_FOLDER).child(file).getDownloadURL();
         dispatch({
             type: GET_BASS_TABS,
+            loading: false,
             src: pdf
-        })        
+        })
+        localStorage.setItem(file, JSON.stringify(pdf));
     } catch (error) {
         console.log(error);
     }

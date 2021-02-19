@@ -36,16 +36,15 @@ const Index = () => {
                     </NavLink>
                 </div>
                 <div className="mt-5">
-                    <img className="img-fluid widthBanner" src="img\bass-tabs-banner.png" alt="" />
+                    <NavLink to="/basstabs">
+                        <img className="img-fluid widthBanner" src="img\bass-tabs-banner.png" alt="" />
+                    </NavLink>
                 </div>
             </div>
             <div className="row justify-content-center mt-5 mb-5">
                 <NavLink type="button"
                     className="btn btn-outline-dark btn-lg buttonMetronomeLink"
                     to="/metronome">Try our metronome</NavLink>
-                <NavLink type="button"
-                    className="btn btn-outline-dark btn-lg buttonMetronomeLink"
-                    to="/basstabs">Bass Tabs</NavLink>
             </div>
         </div>
     )
