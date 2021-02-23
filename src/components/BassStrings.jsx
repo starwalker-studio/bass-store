@@ -45,7 +45,7 @@ const BassStrings = (props) => {
     return (
         <div>
             <div className="text-center">
-                <div className="backgroundModeltitle">
+                <div className="backgroundStringsTitle">
                     <h1 className="">Bass Guitar Strings</h1>
                 </div>
                 <div className="container">
