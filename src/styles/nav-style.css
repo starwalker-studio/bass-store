@@ -1,0 +1,29 @@
+.font-menu-navbar { font-size: larger; }
+
+.margin-menu-navbar { margin-right: 10em; }
+
+.logo-navbar { width: 10ex; margin-left: 8em; }
+
+.navbar-shadow {
+    -webkit-box-shadow: 0px 3px 6px -2px rgba(0,0,0,0.6);
+    box-shadow: 0px 3px 6px -2px rgba(0,0,0,0.6);
+}
+
+.img-display {
+    height: 2.8ex;
+    border-radius: 25px;
+}
+
+.log-out-button {
+    border-radius: 25px;
+    width: 15ex;
+}
+
+.noti-icon-badge {
+    display: inline-block;
+    position: absolute;
+    border-radius: 50%;
+    height: 7px;
+    width: 7px;
+    background-color: #ff5b5b;
+}
