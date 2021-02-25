@@ -32,21 +32,21 @@ export default function modelReducer(state = initData, action) {
                 loading: action.loading, model: action.model
             };
         case GET_WARWICK_MODELS_LOCAL:
-            return { ...state, resutls: action.payload, list: action.list, model: action.model };
+            return { ...state, resutls: action.payload, list: action.list, model: action.model, loading:false };
         case GET_IBANEZ_MODELS:
             return {
                 ...state, resutls: action.payload, list: action.list,
                 loading: action.loading, model: action.model
             };
         case GET_IBANEZ_MODELS_LOCAL:
-            return { ...state, resutls: action.payload, list: action.list, model: action.model };
+            return { ...state, resutls: action.payload, list: action.list, model: action.model, loading:false };
         case GET_EPIPHONE_MODELS:
             return {
                 ...state, resutls: action.payload, list: action.list,
                 loading: action.loading, model: action.model
             };
         case GET_EPIPHONE_MODELS_LOCAL:
-            return { ...state, resutls: action.payload, list: action.list, model: action.model };
+            return { ...state, resutls: action.payload, list: action.list, model: action.model, loading:false };
         default:
             return state;
     }

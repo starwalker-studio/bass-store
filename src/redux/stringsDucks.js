@@ -49,19 +49,19 @@ export default function bassStrReducer(state = initData, action) {
         case GET_DADDARIO_MODELS:
             return { ...state, ddrio: action.response, loading: action.loading };
         case GET_DADDARIO_MODELS_LOCAL:
-            return { ...state, ddrio: action.response };
+            return { ...state, ddrio: action.response, loading: false };
         case GET_DR_MODELS:
             return { ...state, dr: action.response, loading: action.loading };
         case GET_DR_MODELS_LOCAL:
-            return { ...state, dr: action.response };
+            return { ...state, dr: action.response, loading: false };
         case GET_ERNIE_BALL_MODELS:
             return { ...state, ernie: action.response, loading: action.loading };
         case GET_ERNIE_BALL_MODELS_LOCAL:
-            return { ...state, ernie: action.response };
+            return { ...state, ernie: action.response, loading: false };
         case GET_FENDER_MODELS:
             return { ...state, fender: action.response, loading: action.loading };
         case GET_FENDER_MODELS_LOCAL:
-            return { ...state, fender: action.response };
+            return { ...state, fender: action.response, loading: false };
         default:
             return state;
     }

@@ -9,26 +9,28 @@ import Ibanez from './components/Ibanez';
 import Epiphone from './components/Epiphone';
 import BassStrings from './components/BassStrings';
 import PdfBassTabs from './components/PdfBassTabs';
+import Cart from './components/Cart';
 
 function App() {
-  
+
   return (
-      
+
     <Router>
-        <div>
-          <Navbar />
-          <Switch>
-            <Route component={Index} path="/" exact />
-            <Route component={Warwick} path="/warwick" exact />
-            <Route component={Ibanez} path="/ibanez" exact />
-            <Route component={Epiphone} path="/epiphone" exact />
-            <Route component={BassStrings} path="/strings" exact />
-            <Route component={Metronome} path="/metronome" exact />
-            <Route component={PdfBassTabs} path="/basstabs" exact />
-          </Switch>
-        </div>
-      </Router>
-    
+      <div>
+        <Navbar />
+        <Switch>
+          <Route component={Index} path="/" exact />
+          <Route component={Warwick} path="/warwick" exact />
+          <Route component={Ibanez} path="/ibanez" exact />
+          <Route component={Epiphone} path="/epiphone" exact />
+          <Route component={BassStrings} path="/strings" exact />
+          <Route component={Metronome} path="/metronome" exact />
+          <Route component={PdfBassTabs} path="/basstabs" exact />
+          <Route component={Cart} path="/usercart" exact />          
+        </Switch>
+      </div>
+    </Router>
+
   )
 }
 
