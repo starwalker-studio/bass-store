@@ -1,7 +1,8 @@
-import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 
-import Navbar from './components/Navbar';
+import { auth } from './firebase';
+
 import Index from './components/Index';
 import Metronome from './components/Metronome';
 import Warwick from './components/Warwick';
@@ -13,11 +14,26 @@ import Cart from './components/Cart';
 
 function App() {
 
-  return (
+  const [firebaseUser, setFirebaseUser] = useState(false);
 
+  useEffect(() => {
+    const fecthUser = () => {
+      auth.onAuthStateChanged(user => localStorage.getItem(user.uid) && (setFirebaseUser(true)));
+    }
+    fecthUser();
+  }, []);
+
+  const PrivateRoute = ({ component, path, ...rest }) => {
+    if (firebaseUser) {
+      return <Route component={component} path={path} {...rest} />
+    } else {
+      return <Redirect to="/" {...rest} />
+    }
+  }
+
+  return (
     <Router>
       <div>
-        <Navbar />
         <Switch>
           <Route component={Index} path="/" exact />
           <Route component={Warwick} path="/warwick" exact />
@@ -26,11 +42,10 @@ function App() {
           <Route component={BassStrings} path="/strings" exact />
           <Route component={Metronome} path="/metronome" exact />
           <Route component={PdfBassTabs} path="/basstabs" exact />
-          <Route component={Cart} path="/usercart" exact />          
+          <PrivateRoute component={Cart} path="/usercart" exact />
         </Switch>
       </div>
     </Router>
-
   )
 }
 

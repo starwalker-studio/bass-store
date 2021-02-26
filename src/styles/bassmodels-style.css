@@ -4,8 +4,9 @@
 
 .backgroundBassModeltitle {
     height: 19.5ex;
-    background: rgb(11,11,11);
-    color: aliceblue;
+    background: rgb(130,130,130);
+    background: linear-gradient(180deg, rgba(130,130,130,1) 0%, rgba(255,255,255,1) 100%);
+    /* color: aliceblue; */
     padding-top: 11.1ex;
 }
 

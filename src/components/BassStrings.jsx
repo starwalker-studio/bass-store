@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getDaddarioStrings, getDRStrings, getErnieBallStrings, getFenderBallStrings } from '../redux/stringsDucks';
 import { addCart } from '../redux/userDucks';
 
+import Navbar from '../components/Navbar';
+
 import '../styles/strings-style.css';
 import '../styles/loading-animation.css';
 
@@ -54,6 +56,7 @@ const BassStrings = (props) => {
 
     return (
         <div>
+            <Navbar cart={cart} />
             <div className="text-center">
                 <div className="backgroundStringsTitle">
                     <h1 className="">Bass Guitar Strings</h1>
