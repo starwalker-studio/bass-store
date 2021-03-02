@@ -14,6 +14,11 @@ const Navbar = ({ cart }) => {
     const active = useSelector(store => store.googleUser.active);
     const userDisplay = useSelector(store => store.googleUser.user.displayName);
     const userImg = useSelector(store => store.googleUser.user.display);
+    
+    const logOut = () => {
+        dispatch(closeSession());
+        window.location.reload();
+    };
 
     return (
         <div>
@@ -34,7 +39,7 @@ const Navbar = ({ cart }) => {
                                 <div className="d-flex justify-content-end mr-5">
                                     <ul className="navbar-nav">
                                         <li className="nav-item">
-                                            <a className="nav-item nav-link mr-3">
+                                            <a className="nav-item nav-link mr-3" href="#0">
                                                 {userDisplay}
                                                 <img className="img-display ml-2" src={userImg} alt="" /></a>
 
@@ -53,16 +58,16 @@ const Navbar = ({ cart }) => {
                                             </NavLink>
                                         </li>
                                         <li className="nav-item">
-                                            <NavLink onClick={() => dispatch(closeSession())}
+                                            <NavLink onClick={() => logOut()}
                                                 className="nav-item nav-link mr-3" to="/" exact>Close Session</NavLink>
                                         </li>
                                     </ul>
                                 </div>
                             ) : (
                                     <div className="d-flex justify-content-end margin-menu-navbar">
-                                        <a className="nav-item nav-link mr-3"
+                                        <button className="btn btn-dark log-in-button"
                                             type="button"
-                                            onClick={() => dispatch(logUserAction())}>Login</a>
+                                            onClick={() => dispatch(logUserAction())}>Login</button>
                                     </div>
                                 )
                         }
@@ -71,6 +76,6 @@ const Navbar = ({ cart }) => {
             </nav>
         </div>
     )
-}
+};
 
 export default withRouter(Navbar);

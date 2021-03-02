@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { withRouter } from 'react-router-dom';
-
 import { useDispatch, useSelector } from 'react-redux';
 import { addCart } from '../redux/userDucks';
-
 import Navbar from '../components/Navbar';
-
 import '../styles/cart-style.css';
 
-const Cart = (props) => {
+const Cart = () => {
 
     var [cart, setCart] = useState([]);
     const [add, setAdd] = useState(false);
@@ -16,10 +13,8 @@ const Cart = (props) => {
     const dispatch = useDispatch();
 
     const user = useSelector(store => store.googleUser.user);
-    const active = useSelector(store => store.googleUser.active);
 
-    useEffect(() => {
-        !active && (props.history.push('/'));
+    useEffect(() => {        
         window.scrollTo(0, 0);
         localStorage.getItem('cart') && (setCart([...JSON.parse(localStorage.getItem('cart'))]));
     }, []);
@@ -35,10 +30,14 @@ const Cart = (props) => {
         setAdd(true);
         cart = cart.filter(i => i.name !== item);
         setCart([...cart]);
-    }
+    };
 
-    console.log(cart);
-
+    const maskNumber = (price) => {
+        const options = { style: 'currency', currency: 'USD' };
+        const numberFormat = new Intl.NumberFormat('en-US', options);
+        return numberFormat.format(price);
+    };
+    
     return (
         <div>
             <Navbar cart={cart} />
@@ -65,7 +64,7 @@ const Cart = (props) => {
                                                 <tr key={k}>
                                                     <td><img className="img-table-cart" src={item.img} alt="" /></td>
                                                     <td>{item.name}</td>
-                                                    <td>${item.price}</td>
+                                                    <td>{maskNumber(item.price)}</td>
                                                     <td><button className="btn btn-danger"
                                                         onClick={() => {
                                                             removeItem(item.name);
@@ -78,7 +77,7 @@ const Cart = (props) => {
                                     </tbody>
                                 </table>
                                 <hr />
-                                <div>
+                                <div className="mb-5">
                                     <table className="shadow-sm table border text-left">
                                         <tbody>
                                             <tr className="bg-secondary text-white">
@@ -96,7 +95,7 @@ const Cart = (props) => {
                                             </tr>
                                             <tr>
                                                 <td>Grand Total :</td>
-                                                <td>${total}</td>
+                                                <td>{maskNumber(total)}</td>
                                             </tr>
                                             <tr>
                                                 <td>Shipping Charge :</td>
@@ -110,7 +109,7 @@ const Cart = (props) => {
                                                 <th>Total :</th>
                                                 {
                                                     total !== 0 ? (
-                                                        <th>${grandTotal}</th>
+                                                        <th>{maskNumber(grandTotal)}</th>
                                                     ) : (
                                                         <th>$0</th>
                                                     )
@@ -126,6 +125,6 @@ const Cart = (props) => {
             </div>
         </div>
     )
-}
+};
 
 export default withRouter(Cart);

@@ -1,18 +1,15 @@
 import React, { useEffect, useState } from 'react';
-
 import { useDispatch, useSelector } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 import { getDaddarioStrings, getDRStrings, getErnieBallStrings, getFenderBallStrings } from '../redux/stringsDucks';
 import { addCart } from '../redux/userDucks';
-
 import Navbar from '../components/Navbar';
-
 import '../styles/strings-style.css';
 import '../styles/loading-animation.css';
-
 import Swal from 'sweetalert2';
 
 const BassStrings = (props) => {
-    
+
     const [cart, setCart] = useState([]);
     const [add, setAdd] = useState(false);
 
@@ -31,7 +28,7 @@ const BassStrings = (props) => {
             dispatch(getDRStrings());
             dispatch(getErnieBallStrings());
             dispatch(getFenderBallStrings());
-        }
+        };
         getBassStringsRedux();
     }, [dispatch]);
 
@@ -39,7 +36,6 @@ const BassStrings = (props) => {
     const dr_strings = useSelector(store => store.stringModels.dr);
     const ernie_ball_strings = useSelector(store => store.stringModels.ernie);
     const fender_strings = useSelector(store => store.stringModels.fender);
-
     const active = useSelector(store => store.googleUser.active);
 
     const info = (obj) => {
@@ -54,12 +50,18 @@ const BassStrings = (props) => {
 
     add && (dispatch(addCart(cart)));
 
+    const maskNumber = (price) => {
+        const options = { style: 'currency', currency: 'USD' };
+        const numberFormat = new Intl.NumberFormat('en-US', options);
+        return numberFormat.format(price);
+    };
+
     return (
         <div>
             <Navbar cart={cart} />
             <div className="text-center">
                 <div className="backgroundStringsTitle">
-                    <h1 className="">Bass Guitar Strings</h1>
+                    <h1 className="">Bass guitar strings</h1>
                 </div>
                 <div className="container">
                     {
@@ -73,7 +75,7 @@ const BassStrings = (props) => {
                                         <h4>{modelTitle}</h4>
                                         <p>{modelInfo}</p>
                                         <div className="row col">
-                                            <h2 className="mr-5 mt-3">Price: ${modelPrice}</h2>
+                                            <h2 className="mr-5 mt-3">Price: {maskNumber(modelPrice)}</h2>
                                             <button className="btn btn-warning"
                                                 onClick={() => {
                                                     if (active) {
@@ -84,7 +86,10 @@ const BassStrings = (props) => {
                                                     } else {
                                                         Swal.fire('Sign in to add items!');
                                                     }
-                                                }}>Add to Cart</button>
+                                                }}><strong>Add to cart</strong>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-cart4 ml-2" viewBox="0 1 16 16">
+                                                    <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z" />
+                                                </svg></button>
                                         </div>
                                     </div>
                                 </div>
@@ -101,7 +106,7 @@ const BassStrings = (props) => {
                                     <img type="button" className="imgStrings" src={item.exl160.img} alt=""
                                         onClick={() => info(item.exl160)} />
                                     <p className="text-truncate" style={{ width: '11rem', margin: 'auto' }}>{item.exl160.title}</p>
-                                    <h4>${item.exl160.price}</h4>
+                                    <h4>{maskNumber(item.exl160.price)}</h4>
                                     <button className="btn btn-warning"
                                         onClick={() => {
                                             if (active) {
@@ -112,7 +117,9 @@ const BassStrings = (props) => {
                                             } else {
                                                 Swal.fire('Sign in to add items!');
                                             }
-                                        }}>Add to Cart</button>
+                                        }}>Add to Cart<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-cart4 ml-2" viewBox="0 1 16 16">
+                                            <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z" />
+                                        </svg></button>
                                 </div>
                             ))
                         }
@@ -122,7 +129,7 @@ const BassStrings = (props) => {
                                     <img type="button" className="imgStrings" src={item.exl165.img} alt=""
                                         onClick={() => info(item.exl165)} />
                                     <p className="text-truncate" style={{ width: '11rem', margin: 'auto' }}>{item.exl165.title}</p>
-                                    <h4>${item.exl165.price}</h4>
+                                    <h4>{maskNumber(item.exl165.price)}</h4>
                                     <button className="btn btn-warning"
                                         onClick={() => {
                                             if (active) {
@@ -133,7 +140,9 @@ const BassStrings = (props) => {
                                             } else {
                                                 Swal.fire('Sign in to add items!');
                                             }
-                                        }}>Add to Cart</button>
+                                        }}>Add to Cart<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-cart4 ml-2" viewBox="0 1 16 16">
+                                            <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z" />
+                                        </svg></button>
                                 </div>
                             ))
                         }
@@ -143,7 +152,7 @@ const BassStrings = (props) => {
                                     <img type="button" className="imgStrings" src={item.exl170.img} alt=""
                                         onClick={() => info(item.exl170)} />
                                     <p className="text-truncate" style={{ width: '11rem', margin: 'auto' }}>{item.exl170.title}</p>
-                                    <h4>${item.exl170.price}</h4>
+                                    <h4>{maskNumber(item.exl170.price)}</h4>
                                     <button className="btn btn-warning"
                                         onClick={() => {
                                             if (active) {
@@ -154,7 +163,9 @@ const BassStrings = (props) => {
                                             } else {
                                                 Swal.fire('Sign in to add items!');
                                             }
-                                        }}>Add to Cart</button>
+                                        }}>Add to Cart<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-cart4 ml-2" viewBox="0 1 16 16">
+                                            <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z" />
+                                        </svg></button>
                                 </div>
                             ))
                         }
@@ -164,7 +175,7 @@ const BassStrings = (props) => {
                                     <img type="button" className="imgStrings" src={item.exl230.img} alt=""
                                         onClick={() => info(item.exl230)} />
                                     <p className="text-truncate" style={{ width: '11rem', margin: 'auto' }}>{item.exl230.title}</p>
-                                    <h4>${item.exl230.price}</h4>
+                                    <h4>{maskNumber(item.exl230.price)}</h4>
                                     <button className="btn btn-warning"
                                         onClick={() => {
                                             if (active) {
@@ -175,7 +186,9 @@ const BassStrings = (props) => {
                                             } else {
                                                 Swal.fire('Sign in to add items!');
                                             }
-                                        }}>Add to Cart</button>
+                                        }}>Add to Cart<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-cart4 ml-2" viewBox="0 1 16 16">
+                                            <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z" />
+                                        </svg></button>
                                 </div>
                             ))
                         }
@@ -187,7 +200,7 @@ const BassStrings = (props) => {
                                     <img type="button" className="imgStrings" src={item.drblackb.img} alt=""
                                         onClick={() => info(item.drblackb)} />
                                     <p className="text-truncate" style={{ width: '11rem', margin: 'auto' }}>{item.drblackb.title}</p>
-                                    <h4>${item.drblackb.price}</h4>
+                                    <h4>{maskNumber(item.drblackb.price)}</h4>
                                     <button className="btn btn-warning"
                                         onClick={() => {
                                             if (active) {
@@ -198,7 +211,9 @@ const BassStrings = (props) => {
                                             } else {
                                                 Swal.fire('Sign in to add items!');
                                             }
-                                        }}>Add to Cart</button>
+                                        }}>Add to Cart<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-cart4 ml-2" viewBox="0 1 16 16">
+                                            <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z" />
+                                        </svg></button>
                                 </div>
                             ))
                         }
@@ -208,7 +223,7 @@ const BassStrings = (props) => {
                                     <img type="button" className="imgStrings" src={item.drhibeamm.img} alt=""
                                         onClick={() => info(item.drhibeamm)} />
                                     <p className="text-truncate" style={{ width: '11rem', margin: 'auto' }}>{item.drhibeamm.title}</p>
-                                    <h4>$${item.drhibeamm.price}</h4>
+                                    <h4>{maskNumber(item.drhibeamm.price)}</h4>
                                     <button className="btn btn-warning"
                                         onClick={() => {
                                             if (active) {
@@ -219,7 +234,9 @@ const BassStrings = (props) => {
                                             } else {
                                                 Swal.fire('Sign in to add items!');
                                             }
-                                        }}>Add to Cart</button>
+                                        }}>Add to Cart<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-cart4 ml-2" viewBox="0 1 16 16">
+                                            <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z" />
+                                        </svg></button>
                                 </div>
                             ))
                         }
@@ -229,7 +246,7 @@ const BassStrings = (props) => {
                                     <img type="button" className="imgStrings" src={item.drhibeamxl.img} alt=""
                                         onClick={() => info(item.drhibeamxl)} />
                                     <p className="text-truncate" style={{ width: '11rem', margin: 'auto' }}>{item.drhibeamxl.title}</p>
-                                    <h4>$${item.drhibeamxl.price}</h4>
+                                    <h4>{maskNumber(item.drhibeamxl.price)}</h4>
                                     <button className="btn btn-warning"
                                         onClick={() => {
                                             if (active) {
@@ -240,7 +257,9 @@ const BassStrings = (props) => {
                                             } else {
                                                 Swal.fire('Sign in to add items!');
                                             }
-                                        }}>Add to Cart</button>
+                                        }}>Add to Cart<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-cart4 ml-2" viewBox="0 1 16 16">
+                                            <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z" />
+                                        </svg></button>
                                 </div>
                             ))
                         }
@@ -250,7 +269,7 @@ const BassStrings = (props) => {
                                     <img type="button" className="imgStrings" src={item.drlorider.img} alt=""
                                         onClick={() => info(item.drlorider)} />
                                     <p className="text-truncate" style={{ width: '11rem', margin: 'auto' }}>{item.drlorider.title}</p>
-                                    <h4>$${item.drlorider.price}</h4>
+                                    <h4>{maskNumber(item.drlorider.price)}</h4>
                                     <button className="btn btn-warning"
                                         onClick={() => {
                                             if (active) {
@@ -261,7 +280,9 @@ const BassStrings = (props) => {
                                             } else {
                                                 Swal.fire('Sign in to add items!');
                                             }
-                                        }}>Add to Cart</button>
+                                        }}>Add to Cart<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-cart4 ml-2" viewBox="0 1 16 16">
+                                            <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z" />
+                                        </svg></button>
                                 </div>
                             ))
                         }
@@ -273,7 +294,7 @@ const BassStrings = (props) => {
                                     <img type="button" className="imgStrings" src={item.eb2813.img} alt=""
                                         onClick={() => info(item.eb2813)} />
                                     <p className="text-truncate" style={{ width: '11rem', margin: 'auto' }}>{item.eb2813.title}</p>
-                                    <h4>${item.eb2813.price}</h4>
+                                    <h4>{maskNumber(item.eb2813.price)}</h4>
                                     <button className="btn btn-warning"
                                         onClick={() => {
                                             if (active) {
@@ -284,7 +305,9 @@ const BassStrings = (props) => {
                                             } else {
                                                 Swal.fire('Sign in to add items!');
                                             }
-                                        }}>Add to Cart</button>
+                                        }}>Add to Cart<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-cart4 ml-2" viewBox="0 1 16 16">
+                                            <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z" />
+                                        </svg></button>
                                 </div>
                             ))
                         }
@@ -294,7 +317,7 @@ const BassStrings = (props) => {
                                     <img type="button" className="imgStrings" src={item.eb2832.img} alt=""
                                         onClick={() => info(item.eb2832)} />
                                     <p className="text-truncate" style={{ width: '11rem', margin: 'auto' }}>{item.eb2832.title}</p>
-                                    <h4>$${item.eb2832.price}</h4>
+                                    <h4>{maskNumber(item.eb2832.price)}</h4>
                                     <button className="btn btn-warning"
                                         onClick={() => {
                                             if (active) {
@@ -305,7 +328,9 @@ const BassStrings = (props) => {
                                             } else {
                                                 Swal.fire('Sign in to add items!');
                                             }
-                                        }}>Add to Cart</button>
+                                        }}>Add to Cart<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-cart4 ml-2" viewBox="0 1 16 16">
+                                            <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z" />
+                                        </svg></button>
                                 </div>
                             ))
                         }
@@ -315,7 +340,7 @@ const BassStrings = (props) => {
                                     <img type="button" className="imgStrings" src={item.eb2833.img} alt=""
                                         onClick={() => info(item.eb2833)} />
                                     <p className="text-truncate" style={{ width: '11rem', margin: 'auto' }}>{item.eb2833.title}</p>
-                                    <h4>$${item.eb2833.price}</h4>
+                                    <h4>{maskNumber(item.eb2833.price)}</h4>
                                     <button className="btn btn-warning"
                                         onClick={() => {
                                             if (active) {
@@ -326,7 +351,9 @@ const BassStrings = (props) => {
                                             } else {
                                                 Swal.fire('Sign in to add items!');
                                             }
-                                        }}>Add to Cart</button>
+                                        }}>Add to Cart<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-cart4 ml-2" viewBox="0 1 16 16">
+                                            <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z" />
+                                        </svg></button>
                                 </div>
                             ))
                         }
@@ -336,7 +363,7 @@ const BassStrings = (props) => {
                                     <img type="button" className="imgStrings" src={item.eb2834.img} alt=""
                                         onClick={() => info(item.eb2834)} />
                                     <p className="text-truncate" style={{ width: '11rem', margin: 'auto' }}>{item.eb2834.title}</p>
-                                    <h4>$${item.eb2834.price}</h4>
+                                    <h4>{maskNumber(item.eb2834.price)}</h4>
                                     <button className="btn btn-warning"
                                         onClick={() => {
                                             if (active) {
@@ -347,7 +374,9 @@ const BassStrings = (props) => {
                                             } else {
                                                 Swal.fire('Sign in to add items!');
                                             }
-                                        }}>Add to Cart</button>
+                                        }}>Add to Cart<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-cart4 ml-2" viewBox="0 1 16 16">
+                                            <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z" />
+                                        </svg></button>
                                 </div>
                             ))
                         }
@@ -359,7 +388,7 @@ const BassStrings = (props) => {
                                     <img type="button" className="imgStrings" src={item.fender5250.img} alt=""
                                         onClick={() => info(item.fender5250)} />
                                     <p className="text-truncate" style={{ width: '11rem', margin: 'auto' }}>{item.fender5250.title}</p>
-                                    <h4>${item.fender5250.price}</h4>
+                                    <h4>{maskNumber(item.fender5250.price)}</h4>
                                     <button className="btn btn-warning"
                                         onClick={() => {
                                             if (active) {
@@ -370,7 +399,9 @@ const BassStrings = (props) => {
                                             } else {
                                                 Swal.fire('Sign in to add items!');
                                             }
-                                        }}>Add to Cart</button>
+                                        }}>Add to Cart<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-cart4 ml-2" viewBox="0 1 16 16">
+                                            <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z" />
+                                        </svg></button>
                                 </div>
                             ))
                         }
@@ -380,7 +411,7 @@ const BassStrings = (props) => {
                                     <img type="button" className="imgStrings" src={item.fender72505.img} alt=""
                                         onClick={() => info(item.fender72505)} />
                                     <p className="text-truncate" style={{ width: '11rem', margin: 'auto' }}>{item.fender72505.title}</p>
-                                    <h4>$${item.fender72505.price}</h4>
+                                    <h4>{maskNumber(item.fender72505.price)}</h4>
                                     <button className="btn btn-warning"
                                         onClick={() => {
                                             if (active) {
@@ -391,7 +422,9 @@ const BassStrings = (props) => {
                                             } else {
                                                 Swal.fire('Sign in to add items!');
                                             }
-                                        }}>Add to Cart</button>
+                                        }}>Add to Cart<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-cart4 ml-2" viewBox="0 1 16 16">
+                                            <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z" />
+                                        </svg></button>
                                 </div>
                             ))
                         }
@@ -401,7 +434,7 @@ const BassStrings = (props) => {
                                     <img type="button" className="imgStrings" src={item.fender7250.img} alt=""
                                         onClick={() => info(item.fender7250)} />
                                     <p className="text-truncate" style={{ width: '11rem', margin: 'auto' }}>{item.fender7250.title}</p>
-                                    <h4>$${item.fender7250.price}</h4>
+                                    <h4>{maskNumber(item.fender7250.price)}</h4>
                                     <button className="btn btn-warning"
                                         onClick={() => {
                                             if (active) {
@@ -412,7 +445,9 @@ const BassStrings = (props) => {
                                             } else {
                                                 Swal.fire('Sign in to add items!');
                                             }
-                                        }}>Add to Cart</button>
+                                        }}>Add to Cart<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-cart4 ml-2" viewBox="0 1 16 16">
+                                            <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z" />
+                                        </svg></button>
                                 </div>
                             ))
                         }
@@ -422,7 +457,7 @@ const BassStrings = (props) => {
                                     <img type="button" className="imgStrings" src={item.fender9050.img} alt=""
                                         onClick={() => info(item.fender9050)} />
                                     <p className="text-truncate" style={{ width: '11rem', margin: 'auto' }}>{item.fender9050.title}</p>
-                                    <h4>$${item.fender9050.price}</h4>
+                                    <h4>{maskNumber(item.fender9050.price)}</h4>
                                     <button className="btn btn-warning"
                                         onClick={() => {
                                             if (active) {
@@ -433,15 +468,35 @@ const BassStrings = (props) => {
                                             } else {
                                                 Swal.fire('Sign in to add items!');
                                             }
-                                        }}>Add to Cart</button>
+                                        }}>Add to Cart<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-cart4 ml-2" viewBox="0 1 16 16">
+                                            <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z" />
+                                        </svg></button>
                                 </div>
                             ))
                         }
                     </div>
+                    <hr />
+                    <h2>Bass Guitars</h2>
+                    <div className="mt-5 mb-5">
+                        <NavLink to="/warwick">
+                            <button type="button" className="btn btn-light border buttonImg mr-2">Warwick</button>
+                        </NavLink>
+                        <NavLink to="/ibanez">
+                            <button type="button" className="btn btn-light border buttonImg mr-2" >Ibañez</button>
+                        </NavLink>
+                        <NavLink to="/epiphone">
+                            <button type="button" className="btn btn-light border buttonImg mr-2" >Epiphone</button>
+                        </NavLink>
+                    </div>
+                    <hr />
+                    <NavLink to="/">
+                        <button className="btn btn-outline-dark buttonReturnHome mb-5"
+                        >Return to Home</button>
+                    </NavLink>
                 </div>
             </div>
         </div>
     )
-}
+};
 
-export default BassStrings
+export default BassStrings;

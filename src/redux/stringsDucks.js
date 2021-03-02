@@ -1,4 +1,4 @@
-import { storage, db } from '../firebase';
+import { db } from '../firebase';
 
 // Constants
 const DDRIO_FOLDER = 'daddario';

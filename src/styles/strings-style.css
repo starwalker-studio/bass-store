@@ -23,4 +23,11 @@
   
 .imgStrings:hover {
     filter: brightness(132%);
-  }
+}
+
+.buttonReturnHome {
+    margin-top: 7ex;
+    border-radius: 25px;
+    width: 13em;
+    height: 5.5ex;
+}

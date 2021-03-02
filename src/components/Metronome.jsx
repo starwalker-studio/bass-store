@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
-
 import Navbar from '../components/Navbar';
-
 import '../styles/metronome-style.css';
 
 const Metronome = () => {
@@ -54,7 +52,7 @@ const Metronome = () => {
     return (
         <div>
             <Navbar cart={cart} />
-            <div className="cointainer mt-3 container-padding">
+            <div className="cointainer mt-3 container-padding p-5 mb-5">
                 <div className="row justify-content-md-center">
                     <div className="col-md-auto">
                         <h1 className="mt-5 centerText">Metronome 4/4</h1>
@@ -142,7 +140,7 @@ const Metronome = () => {
                     <div className="col-sm" />
                     <div className="col-sm" />
                 </div>
-                <div className="row justify-content-center mt-5">
+                <div className="row justify-content-center mt-5 mb-5">
                     <NavLink type="button"
                         className="btn btn-outline-dark btn-lg buttonMetronomeLink"
                         to="/">Return to home</NavLink>
@@ -150,6 +148,6 @@ const Metronome = () => {
             </div>
         </div>
     )
-}
+};
 
-export default Metronome
+export default Metronome;

@@ -1,8 +1,6 @@
 import React, { useState, useEffect }  from 'react';
 import { NavLink } from 'react-router-dom';
-
 import Navbar from '../components/Navbar';
-
 import '../styles/index-style.css';
 
 const Index = () => {
@@ -57,6 +55,6 @@ const Index = () => {
             </div>
         </div>
     )
-}
+};
 
-export default Index
+export default Index;

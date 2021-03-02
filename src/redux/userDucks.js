@@ -13,7 +13,6 @@ const LOGIN_USER = 'LOGIN_USER';
 const LOAD_SUCCESS_USER = 'LOAD_SUCCESS_USER';
 const CLOSE_SESSION = 'CLOSE_SESSION';
 const ADD_CART_ACTION_TO_LOCAL = 'ADD_CART_ACTION_TO_LOCAL';
-const GET_USER_INFO = 'GET_USER_INFO';
 
 // Reducer
 export default function userReducer(state = initData, action) {
@@ -35,6 +34,7 @@ export default function userReducer(state = initData, action) {
 
 // Actions
 export const logUserAction = () => async (dispatch) => {
+    const date = new Date();
     dispatch({
         type: LOADING
     });
@@ -46,8 +46,10 @@ export const logUserAction = () => async (dispatch) => {
             email: response.user.email,
             displayName: response.user.displayName,
             display: response.user.photoURL,
+            date: date,
             cart: []
         };
+        
         await db.collection('users').doc(response.user.uid).get().then(ref => {
             if (!ref.data()) {
                 console.log('registro firestore');

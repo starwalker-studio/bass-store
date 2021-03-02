@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
-
-import { auth } from './firebase';
+import { useSelector } from 'react-redux';
 
 import Index from './components/Index';
 import Metronome from './components/Metronome';
@@ -11,20 +10,14 @@ import Epiphone from './components/Epiphone';
 import BassStrings from './components/BassStrings';
 import PdfBassTabs from './components/PdfBassTabs';
 import Cart from './components/Cart';
+import Footer from './components/Footer';
 
 function App() {
 
-  const [firebaseUser, setFirebaseUser] = useState(false);
-
-  useEffect(() => {
-    const fecthUser = () => {
-      auth.onAuthStateChanged(user => localStorage.getItem(user.uid) && (setFirebaseUser(true)));
-    }
-    fecthUser();
-  }, []);
+  const active = useSelector(store => store.googleUser.active);
 
   const PrivateRoute = ({ component, path, ...rest }) => {
-    if (firebaseUser) {
+    if (active) {
       return <Route component={component} path={path} {...rest} />
     } else {
       return <Redirect to="/" {...rest} />
@@ -44,6 +37,7 @@ function App() {
           <Route component={PdfBassTabs} path="/basstabs" exact />
           <PrivateRoute component={Cart} path="/usercart" exact />
         </Switch>
+        <Footer></Footer>
       </div>
     </Router>
   )

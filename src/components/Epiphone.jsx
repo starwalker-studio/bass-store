@@ -1,18 +1,12 @@
 import React, { useState, useEffect } from 'react';
-
 import { NavLink } from 'react-router-dom';
-
 import { useDispatch, useSelector } from 'react-redux';
 import { getEpiphoneModels } from '../redux/bassModelsDucks';
-
 import { getDaddarioStrings, getDRStrings, getErnieBallStrings, getFenderBallStrings } from '../redux/stringsDucks';
 import { addCart } from '../redux/userDucks';
-
 import Navbar from '../components/Navbar';
-
 import '../styles/bassmodels-style.css';
 import '../styles/loading-animation.css';
-
 import Swal from 'sweetalert2';
 
 const Epiphone = () => {
@@ -28,30 +22,34 @@ const Epiphone = () => {
         localStorage.getItem('cart') && (setCart([...JSON.parse(localStorage.getItem('cart'))]));
         const getEpiphoneRedux = () => {
             dispatch(getEpiphoneModels(num));
-        }
+        };
         const getBassStringsRedux = () => {
             dispatch(getDaddarioStrings());
             dispatch(getDRStrings());
             dispatch(getErnieBallStrings());
             dispatch(getFenderBallStrings());
-        }
+        };
         getBassStringsRedux();
         getEpiphoneRedux();
-    }, [num, dispatch])
+    }, [num, dispatch]);
 
     const models = useSelector(store => store.bassModels.resutls);
     const list = useSelector(store => store.bassModels.list);
     const loading = useSelector(store => store.bassModels.loading);
     const model = useSelector(store => store.bassModels.model);
-
     const ddrio_strings = useSelector(store => store.stringModels.ddrio);
     const dr_strings = useSelector(store => store.stringModels.dr);
     const ernie_ball_strings = useSelector(store => store.stringModels.ernie);
     const fender_strings = useSelector(store => store.stringModels.fender);
-
     const active = useSelector(store => store.googleUser.active);
 
     add && (dispatch(addCart(cart)));
+
+    const maskNumber = (price) => {
+        const options = { style: 'currency', currency: 'USD' };
+        const numberFormat = new Intl.NumberFormat('en-US', options);
+        return numberFormat.format(price);
+    };
 
     return models ? (
         <div>
@@ -129,7 +127,7 @@ const Epiphone = () => {
                                     </div>
                                     <div className="col-sm text-center">
                                         <div className="p-4 mb-2 bg-light text-dark border">
-                                            <h3>Price: <strong>${model.price}</strong></h3>
+                                            <h3>Price: <strong>{maskNumber(model.price)}</strong></h3>
                                             <button className="mt-3 mb-2 btn btn-warning btn-lg"
                                                 onClick={() => {
                                                     if (active) {
@@ -156,7 +154,7 @@ const Epiphone = () => {
                                             <NavLink to={{ pathname: "/strings", state: { view: true, stringbass: item.exl230 } }}>
                                                 <img className="imgStrings" src={item.exl230.img} alt="" />
                                             </NavLink>
-                                            <h4 className="mt-2">${item.exl230.price}</h4>
+                                            <h4 className="mt-2">{maskNumber(item.exl230.price)}</h4>
                                             <button className="btn btn-warning"
                                                 onClick={() => {
                                                     if (active) {
@@ -177,7 +175,7 @@ const Epiphone = () => {
                                             <NavLink to={{ pathname: "/strings", state: { view: true, stringbass: item.fender72505 } }}>
                                                 <img className="imgStrings" src={item.fender72505.img} alt="" />
                                             </NavLink>
-                                            <h4 className="mt-2">${item.fender72505.price}</h4>
+                                            <h4 className="mt-2">{maskNumber(item.fender72505.price)}</h4>
                                             <button className="btn btn-warning"
                                                 onClick={() => {
                                                     if (active) {
@@ -198,7 +196,7 @@ const Epiphone = () => {
                                             <NavLink to={{ pathname: "/strings", state: { view: true, stringbass: item.eb2833 } }}>
                                                 <img className="imgStrings" src={item.eb2833.img} alt="" />
                                             </NavLink>
-                                            <h4 className="mt-2">${item.eb2833.price}</h4>
+                                            <h4 className="mt-2">{maskNumber(item.eb2833.price)}</h4>
                                             <button className="btn btn-warning"
                                                 onClick={() => {
                                                     if (active) {
@@ -219,7 +217,7 @@ const Epiphone = () => {
                                             <NavLink to={{ pathname: "/strings", state: { view: true, stringbass: item.drlorider } }}>
                                                 <img className="imgStrings" src={item.drlorider.img} alt="" />
                                             </NavLink>
-                                            <h4 className="mt-2">${item.drlorider.price}</h4>
+                                            <h4 className="mt-2">{maskNumber(item.drlorider.price)}</h4>
                                             <button className="btn btn-warning"
                                                 onClick={() => {
                                                     if (active) {
@@ -236,7 +234,7 @@ const Epiphone = () => {
                                 }
                             </div>
                             <hr />
-                            <div className="mb-4">
+                            <div className="mt-5 mb-5">
                                 <NavLink to="/warwick">
                                     <button type="button" className="btn btn-light border buttonImg mr-2">Warwick</button>
                                 </NavLink>
@@ -259,6 +257,6 @@ const Epiphone = () => {
             </div>
         </div>
     ) : null
-}
+};
 
-export default Epiphone
+export default Epiphone;

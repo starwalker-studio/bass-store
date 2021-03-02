@@ -1,17 +1,10 @@
 import React, { useState, useEffect } from 'react';
-
 import { NavLink } from 'react-router-dom';
-
 import { useDispatch, useSelector } from 'react-redux';
-
 import { getBassTabs } from '../redux/bassTabsDucks';
-
 import { Document, Page, pdfjs } from 'react-pdf';
-
 import Navbar from '../components/Navbar';
-
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
-
 import '../styles/basstabs-style.css';
 
 const PdfBassTabs = () => {
@@ -27,9 +20,7 @@ const PdfBassTabs = () => {
     const [play, setPlay] = useState(false);
     const [click] = useState(new Audio());
     const [sliderValue, setSliderValue] = useState(100);
-
     const [catalog, setCatalog] = useState(true);
-
     const [cart, setCart] = useState([]);
 
     const dispatch = useDispatch();
@@ -77,13 +68,13 @@ const PdfBassTabs = () => {
     const getPdf = (file) => {
         dispatch(getBassTabs(file));
         setCatalog(false);
-    }
+    };
 
     const returnBassTabs = () => {
         setNumPages(null);
         setPageNumber(1);
         setCatalog(true);
-    }
+    };
 
     return (
         <div>
@@ -124,7 +115,7 @@ const PdfBassTabs = () => {
                                 <div>
                                     <div className="row justify-content-center">
                                         <ul className="list-group list-group-flush text-left">
-                                            <li className="list-group-item disabled text-center" aria-disabled="true"><h1>Bass Tabs</h1></li>
+                                            <li className="list-group-item text-center"><h1>Bass Tabs</h1></li>
                                             {
                                                 files.map(item => (
                                                     <li key={item.band}
@@ -142,7 +133,7 @@ const PdfBassTabs = () => {
                                     </div>
                                     <hr />
                                     <NavLink to="/">
-                                        <button className="btn btn-dark buttonReturnCatalog mt-2 mb-5"
+                                        <button className="btn btn-dark buttonReturnCatalog mt-5 mb-5"
                                             onClick={() => returnBassTabs()}>Return to Home</button>
                                     </NavLink>
                                 </div>
@@ -174,7 +165,7 @@ const PdfBassTabs = () => {
                                                     )
                                                 }
                                             </div>
-                                            <button className="btn btn-info buttonReturnCatalog"
+                                            <button className="btn btn-info mt-5 mb-5 buttonReturnCatalog"
                                                 onClick={() => returnBassTabs()}>Return to Bass Tabs</button>
                                         </div>
                                     ) : (
@@ -191,6 +182,6 @@ const PdfBassTabs = () => {
             </div >
         </div>
     )
-}
+};
 
-export default PdfBassTabs
+export default PdfBassTabs;
