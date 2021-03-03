@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { logUserAction, closeSession } from '../redux/userDucks';
 
 import '../styles/nav-style.css';
+import logo from '../logo/bass-logo-store.png';
 
 
 const Navbar = ({ cart }) => {
@@ -23,8 +24,8 @@ const Navbar = ({ cart }) => {
     return (
         <div>
             <nav className="navbar navbar-expand-lg navbar-light bg-light py-1 py-md-2 fixed-top navbar-shadow" >
-                <Link className="navbar-brand" to="/">
-                    <img className="logo-navbar" src="img\bass-logo-store.png" alt="" />
+                <Link className="navbar-brand" to="/bass-store/">
+                    <img className="logo-navbar" src={logo} alt="" />
                 </Link>
                 <button className="navbar-toggler"
                     type="button" data-toggle="collapse"

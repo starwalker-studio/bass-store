@@ -239,7 +239,7 @@ const Ibanez = () => {
                                 <NavLink to="/warwick">
                                     <button type="button" className="btn btn-light border buttonImg mr-2">Warwick</button>
                                 </NavLink>
-                                <NavLink to="/">
+                                <NavLink to="/bass-store">
                                     <button type="button" className="btn btn-light border buttonImg mr-2" >Home</button>
                                 </NavLink>
                                 <NavLink to="/epiphone">

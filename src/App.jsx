@@ -20,7 +20,7 @@ function App() {
     if (active) {
       return <Route component={component} path={path} {...rest} />
     } else {
-      return <Redirect to="/" {...rest} />
+      return <Redirect to="/bass-store" {...rest} />
     }
   }
 
@@ -28,7 +28,7 @@ function App() {
     <Router>
       <div>
         <Switch>
-          <Route component={Index} path="/" exact />
+          <Route component={Index} path="/bass-store" exact />
           <Route component={Warwick} path="/warwick" exact />
           <Route component={Ibanez} path="/ibanez" exact />
           <Route component={Epiphone} path="/epiphone" exact />

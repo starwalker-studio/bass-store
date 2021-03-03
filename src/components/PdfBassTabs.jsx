@@ -6,6 +6,7 @@ import { Document, Page, pdfjs } from 'react-pdf';
 import Navbar from '../components/Navbar';
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 import '../styles/basstabs-style.css';
+import korg from '../sound/Korg-N1R-Metronome-Click.wav';
 
 const PdfBassTabs = () => {
 
@@ -49,7 +50,7 @@ const PdfBassTabs = () => {
         setSeconds(1);
     };
 
-    click.src = 'sound/Korg-N1R-Metronome-Click.wav';
+    click.src = korg;
 
     useEffect(() => {
         localStorage.getItem('cart') && (setCart([...JSON.parse(localStorage.getItem('cart'))]));
@@ -132,7 +133,7 @@ const PdfBassTabs = () => {
                                         </ul>
                                     </div>
                                     <hr />
-                                    <NavLink to="/">
+                                    <NavLink to="/bass-store">
                                         <button className="btn btn-dark buttonReturnCatalog mt-5 mb-5"
                                             onClick={() => returnBassTabs()}>Return to Home</button>
                                     </NavLink>

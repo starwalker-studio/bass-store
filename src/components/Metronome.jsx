@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import '../styles/metronome-style.css';
+import korg from '../sound/Korg-N1R-Metronome-Click.wav';
 
 const Metronome = () => {
 
@@ -19,7 +20,7 @@ const Metronome = () => {
         setSeconds(1);
     };
 
-    click.src = 'sound/Korg-N1R-Metronome-Click.wav';
+    click.src = korg;
 
     useEffect(() => {
         localStorage.getItem('cart') && (setCart([...JSON.parse(localStorage.getItem('cart'))]));
@@ -143,7 +144,7 @@ const Metronome = () => {
                 <div className="row justify-content-center mt-5 mb-5">
                     <NavLink type="button"
                         className="btn btn-outline-dark btn-lg buttonMetronomeLink"
-                        to="/">Return to home</NavLink>
+                        to="/bass-store">Return to home</NavLink>
                 </div>
             </div>
         </div>
