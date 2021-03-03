@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/bass-store/static/css/main.746564dd.chunk.css",
-    "main.js": "/bass-store/static/js/main.95b3c913.chunk.js",
-    "main.js.map": "/bass-store/static/js/main.95b3c913.chunk.js.map",
+    "main.js": "/bass-store/static/js/main.39ae2a2c.chunk.js",
+    "main.js.map": "/bass-store/static/js/main.39ae2a2c.chunk.js.map",
     "runtime-main.js": "/bass-store/static/js/runtime-main.645d8e63.js",
     "runtime-main.js.map": "/bass-store/static/js/runtime-main.645d8e63.js.map",
     "static/css/2.e50fe18a.chunk.css": "/bass-store/static/css/2.e50fe18a.chunk.css",
@@ -11,13 +11,15 @@
     "index.html": "/bass-store/index.html",
     "static/css/2.e50fe18a.chunk.css.map": "/bass-store/static/css/2.e50fe18a.chunk.css.map",
     "static/css/main.746564dd.chunk.css.map": "/bass-store/static/css/main.746564dd.chunk.css.map",
-    "static/js/2.ae13f3ef.chunk.js.LICENSE.txt": "/bass-store/static/js/2.ae13f3ef.chunk.js.LICENSE.txt"
+    "static/js/2.ae13f3ef.chunk.js.LICENSE.txt": "/bass-store/static/js/2.ae13f3ef.chunk.js.LICENSE.txt",
+    "static/media/Korg-N1R-Metronome-Click.455044e8.wav": "/bass-store/static/media/Korg-N1R-Metronome-Click.455044e8.wav",
+    "static/media/bass-logo-store.f7dfd6d1.png": "/bass-store/static/media/bass-logo-store.f7dfd6d1.png"
   },
   "entrypoints": [
     "static/js/runtime-main.645d8e63.js",
     "static/css/2.e50fe18a.chunk.css",
     "static/js/2.ae13f3ef.chunk.js",
     "static/css/main.746564dd.chunk.css",
-    "static/js/main.95b3c913.chunk.js"
+    "static/js/main.39ae2a2c.chunk.js"
   ]
 }
