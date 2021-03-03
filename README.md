@@ -12,4 +12,6 @@ Created by Juan Alberto Rodriguez / React js. 2021.
 
 **Note:**
 
-This site does not work on IOS surfaces only on PC and Android.  
+This site does not work on IOS surfaces only on PC and Android.
+
+To sign in is only with Google Account (gmail).
