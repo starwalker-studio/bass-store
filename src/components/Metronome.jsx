@@ -144,7 +144,7 @@ const Metronome = () => {
                 <div className="row justify-content-center mt-5 mb-5">
                     <NavLink type="button"
                         className="btn btn-outline-dark btn-lg buttonMetronomeLink"
-                        to="/bass-store">Return to home</NavLink>
+                        to="/bass-store/">Return to home</NavLink>
                 </div>
             </div>
         </div>

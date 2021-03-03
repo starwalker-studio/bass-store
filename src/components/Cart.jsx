@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { NavLink } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { addCart } from '../redux/userDucks';
@@ -14,7 +15,7 @@ const Cart = () => {
 
     const user = useSelector(store => store.googleUser.user);
 
-    useEffect(() => {        
+    useEffect(() => {
         window.scrollTo(0, 0);
         localStorage.getItem('cart') && (setCart([...JSON.parse(localStorage.getItem('cart'))]));
     }, []);
@@ -37,7 +38,7 @@ const Cart = () => {
         const numberFormat = new Intl.NumberFormat('en-US', options);
         return numberFormat.format(price);
     };
-    
+
     return (
         <div>
             <Navbar cart={cart} />
@@ -111,15 +112,21 @@ const Cart = () => {
                                                     total !== 0 ? (
                                                         <th>{maskNumber(grandTotal)}</th>
                                                     ) : (
-                                                        <th>$0</th>
-                                                    )
-                                                }                                                
+                                                            <th>$0</th>
+                                                        )
+                                                }
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
+
                         </div>
+                        <hr />
+                        <NavLink to="/bass-store/">
+                            <button className="btn btn-outline-dark buttonReturnHome mb-5"
+                            >Return to Home</button>
+                        </NavLink>
                     </div>
                 </div>
             </div>

@@ -489,7 +489,7 @@ const BassStrings = (props) => {
                         </NavLink>
                     </div>
                     <hr />
-                    <NavLink to="/">
+                    <NavLink to="/bass-store/">
                         <button className="btn btn-outline-dark buttonReturnHome mb-5"
                         >Return to Home</button>
                     </NavLink>

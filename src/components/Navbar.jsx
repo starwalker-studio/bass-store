@@ -24,7 +24,7 @@ const Navbar = ({ cart }) => {
     return (
         <div>
             <nav className="navbar navbar-expand-lg navbar-light bg-light py-1 py-md-2 fixed-top navbar-shadow" >
-                <Link className="navbar-brand" to="/bass-store">
+                <Link className="navbar-brand" to="/bass-store/">
                     <img className="logo-navbar" src={logo} alt="" />
                 </Link>
                 <button className="navbar-toggler"
@@ -60,7 +60,7 @@ const Navbar = ({ cart }) => {
                                         </li>
                                         <li className="nav-item">
                                             <NavLink onClick={() => logOut()}
-                                                className="nav-item nav-link mr-3" to="/bass-store" exact>Close Session</NavLink>
+                                                className="nav-item nav-link mr-3" to="/bass-store/" exact>Close Session</NavLink>
                                         </li>
                                     </ul>
                                 </div>

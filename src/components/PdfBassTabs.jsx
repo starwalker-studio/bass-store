@@ -133,7 +133,7 @@ const PdfBassTabs = () => {
                                         </ul>
                                     </div>
                                     <hr />
-                                    <NavLink to="/bass-store">
+                                    <NavLink to="/bass-store/">
                                         <button className="btn btn-dark buttonReturnCatalog mt-5 mb-5"
                                             onClick={() => returnBassTabs()}>Return to Home</button>
                                     </NavLink>

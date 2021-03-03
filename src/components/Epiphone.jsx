@@ -241,7 +241,7 @@ const Epiphone = () => {
                                 <NavLink to="/ibanez">
                                     <button type="button" className="btn btn-light border buttonImg mr-2" >Ibañez</button>
                                 </NavLink>
-                                <NavLink to="/bass-store">
+                                <NavLink to="/bass-store/">
                                     <button type="button" className="btn btn-light border buttonImg mr-2" >Home</button>
                                 </NavLink>
                             </div>

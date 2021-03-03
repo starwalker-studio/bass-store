@@ -235,7 +235,7 @@ const Warwick = () => {
                             </div>
                             <hr />
                             <div className="mt-5 mb-5">
-                                <NavLink to="/bass-store">
+                                <NavLink to="/bass-store/">
                                     <button type="button" className="btn btn-light border buttonImg mr-2" >Home</button>
                                 </NavLink>
                                 <NavLink to="/ibanez">
