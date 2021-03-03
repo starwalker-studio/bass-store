@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/bass-store/static/css/main.746564dd.chunk.css",
-    "main.js": "/bass-store/static/js/main.b445a0b5.chunk.js",
-    "main.js.map": "/bass-store/static/js/main.b445a0b5.chunk.js.map",
+    "main.js": "/bass-store/static/js/main.9efebcca.chunk.js",
+    "main.js.map": "/bass-store/static/js/main.9efebcca.chunk.js.map",
     "runtime-main.js": "/bass-store/static/js/runtime-main.645d8e63.js",
     "runtime-main.js.map": "/bass-store/static/js/runtime-main.645d8e63.js.map",
     "static/css/2.e50fe18a.chunk.css": "/bass-store/static/css/2.e50fe18a.chunk.css",
@@ -20,6 +20,6 @@
     "static/css/2.e50fe18a.chunk.css",
     "static/js/2.42de097a.chunk.js",
     "static/css/main.746564dd.chunk.css",
-    "static/js/main.b445a0b5.chunk.js"
+    "static/js/main.9efebcca.chunk.js"
   ]
 }
