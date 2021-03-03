@@ -18,7 +18,6 @@ const Navbar = ({ cart }) => {
     
     const logOut = () => {
         dispatch(closeSession());
-        window.location.reload();
     };
 
     return (
